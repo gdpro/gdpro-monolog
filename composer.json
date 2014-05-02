@@ -31,11 +31,5 @@
     "autoload-dev": {
         "psr-4": { "GdproMonolog\\Tests\\": "tests/" }
     },
-    "minimum-stability": "stable",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url":  "git@github.com:gdpro/zf2-monolog.git"
-        }
-    ]
+    "minimum-stability": "stable"
 }
