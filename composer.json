@@ -1,0 +1,41 @@
+{
+    "name": "gdpro/zf2-monolog",
+    "description": "Monolog integration for ZF2",
+    "type": "library",
+    "keywords": ["log", "logging", "zf2", "monolog", "integration", "debugging"],
+    "homepage": "https://github.com/gdpro/zf2-monolog/blob/master/README.md",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gary Gitton",
+            "email": "contact@gary.pro",
+            "homepage": "http://www.gary.pro",
+            "role": "Software Engineer"
+        }
+    ],
+    "support": {
+        "email": "contact@gary.pro",
+        "issues": "https://github.com/gdpro/zf2-monolog/issues",
+        "wiki": "https://github.com/gdpro/zf2-monolog/wiki"
+    },
+    "require": {
+        "php": ">=5.5",
+        "monolog/monolog": "1.9.*@dev"
+    },
+    "require-dev": {
+
+    },
+    "autoload": {
+        "psr-4": { "GdproMonolog\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "GdproMonolog\\Tests\\": "tests/" }
+    },
+    "minimum-stability": "stable",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "git@github.com:gdpro/zf2-monolog.git"
+        }
+    ]
+}
