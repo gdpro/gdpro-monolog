@@ -2,7 +2,7 @@
     "name": "gdpro/zf2-monolog",
     "description": "Monolog integration for ZF2",
     "type": "library",
-    "keywords": ["log", "logging", "zf2", "monolog", "integration", "debugging"],
+    "keywords": ["log", "logging", "zf2", "monolog", "integration", "debugging", "plugin"],
     "homepage": "https://github.com/gdpro/zf2-monolog/blob/master/README.md",
     "license": "MIT",
     "authors": [
@@ -19,17 +19,17 @@
         "wiki": "https://github.com/gdpro/zf2-monolog/wiki"
     },
     "require": {
-        "php": ">=5.5",
-        "monolog/monolog": "1.9.*@dev"
+        "php": ">=5.3.0",
+        "monolog/monolog": "dev-master"
     },
     "require-dev": {
-        "phpunit/phpunit": "4.2.*@dev"
+        "phpunit/phpunit": "dev-master"
     },
     "autoload": {
         "psr-4": { "GdproMonolog\\": "src/" }
     },
     "autoload-dev": {
-        "psr-4": { "GdproMonolog\\Tests\\": "tests/" }
+        "psr-4": { "GdproMonologTests\\": "test/" }
     },
     "minimum-stability": "dev"
 }
