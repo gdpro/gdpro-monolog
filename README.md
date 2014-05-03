@@ -1,6 +1,8 @@
 Monolog logging integration to ZF2
 ==================================
 
+[![Build Status](https://travis-ci.org/gdpro/zf2-monolog.svg?branch=develop)](https://travis-ci.org/gdpro/zf2-monolog)
+
 The repository adds support for logging to Monolog to the Zend Framework 2.
 
 
