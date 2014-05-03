@@ -1,4 +1,6 @@
 <?php
 array(
+    'monolog' => array(
 
+    ),
 );
