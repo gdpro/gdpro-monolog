@@ -1,5 +1,5 @@
 <?php
-namespace GdproMonolog;
+namespace Zf2Monolog;
 
 use Zend\ServiceManager\AbstractFactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;

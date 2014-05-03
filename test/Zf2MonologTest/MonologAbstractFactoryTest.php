@@ -1,5 +1,5 @@
 <?php
-namespace GdproMonologTest;
+namespace Zf2MonologTest;
 
 use PHPUnit_Framework_TestCase;
 

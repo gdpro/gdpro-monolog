@@ -1,5 +1,5 @@
 <?php
-namespace GdproMonolog;
+namespace Zf2Monolog;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;

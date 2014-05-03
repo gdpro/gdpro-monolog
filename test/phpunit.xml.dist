@@ -2,8 +2,8 @@
 
 <phpunit bootstrap="Bootstrap.php">
     <testsuites>
-        <testsuite name="zf2tutorial">
-            <directory>./GdproMonologTest</directory>
+        <testsuite name="zf2monolog">
+            <directory>./Zf2MonologTest</directory>
         </testsuite>
     </testsuites>
 </phpunit>

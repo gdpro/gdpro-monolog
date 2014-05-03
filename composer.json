@@ -26,10 +26,10 @@
         "phpunit/phpunit": "dev-master"
     },
     "autoload": {
-        "psr-4": { "GdproMonolog\\": "src/" }
+        "psr-4": { "Zf2Monolog\\": "src/" }
     },
     "autoload-dev": {
-        "psr-4": { "GdproMonologTests\\": "test/" }
+        "psr-4": { "Zf2MonologTest\\": "test/" }
     },
     "minimum-stability": "dev"
 }
