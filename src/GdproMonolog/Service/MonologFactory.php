@@ -1,5 +1,5 @@
 <?php
-namespace Zf2Monolog;
+namespace GdproMonolog;
 
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
