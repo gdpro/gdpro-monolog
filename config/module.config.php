@@ -1,10 +1,10 @@
 <?php
-return array(
-    'monolog' => array(
+return [
+    'monolog' => [
 
-    ),
-);
-//
+    ],
+];
+
 //keLog::config('logstash', array(
 //    'engine' => 'Monolog.Monolog',
 //    'channel' => 'app',
@@ -31,3 +31,73 @@ return array(
 //        )
 //    )
 //));
+
+
+// OLD CONFIG OF MY OTEHR MODULE
+//return [
+//    'log_trace_tiguada_options' => [
+//        'name' => 'Trace Logger for Tiguada',
+//        'handlers' => [
+//            'default' => [
+//                'name' => 'Monolog\Handler\StreamHandler',
+//                'args' => [
+//                    'path' => 'data/log/tiguada.trace.log',
+//                    'level' => \Monolog\Logger::INFO,
+//                    'bubble' => true
+//                ],
+//                'formatter' => [
+//                    'name' => 'Monolog\Formatter\LogstashFormatter',
+//                    'args' => [
+//                        'application' => 'Tiguada',
+//                    ]
+//                ]
+//            ]
+//        ]
+//    ],
+//    '\Service\Monolog\Default' => [
+//        'name' => 'Default Logger',
+//        'handlers' => [
+//            'default' => [
+//                'name' => 'Monolog\Handler\StreamHandler',
+//                'args' => [
+//                    'path' => 'data/log/default.log',
+//                    'level' => \Monolog\Logger::DEBUG,
+//                    'bubble' => true
+//                ],
+//                'formatter' => [
+//                    'name' => 'Monolog\Formatter\LogstashFormatter',
+//                    'args' => [
+//                        'application' => 'Blurgroup/Blur',
+//                    ]
+//                ]
+//            ]
+//        ]
+//    ],
+//    '\Service\Monolog\Exception' => [
+//        'name' => 'Exception Logger',
+//        'handlers' => [
+//            'default' => [
+//                'name' => 'Monolog\Handler\StreamHandler',
+//                'args' => [
+//                    'path' => 'data/log/exception.log',
+//                    'level' => \Monolog\Logger::DEBUG,
+//                    'bubble' => true
+//                ],
+//                'formatter' => [
+//                    'name' => 'Monolog\Formatter\LogstashFormatter',
+//                    'args' => [
+//                        'application' => 'Blur',
+//                    ]
+//                ]
+//            ]
+//        ]
+//    ],
+//    'MyChromeLogger' => [
+//        'name' => 'Chrome Logger',
+//        'handlers' => [
+//            [
+//                'name' => 'Monolog\Handler\ChromePHPHandler',
+//            ]
+//        ]
+//    ]
+//];
