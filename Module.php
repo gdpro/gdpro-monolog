@@ -12,7 +12,7 @@ class Module
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
 
-        $eventManager->attach(new MonologListener());
+//        $eventManager->attach(new MonologListener());
     }
 
     public function getConfig()
