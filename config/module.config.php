@@ -3,6 +3,55 @@ return [
     'monolog' => [
 
     ],
+
+    'Blur\Service\Monolog\Default' => [
+        'name' => 'Default Logger',
+        'handlers' => [
+            'default' => [
+                'name' => 'Monolog\Handler\StreamHandler',
+                'args' => [
+                    'path' => 'data/log/default.log',
+                    'level' => \Monolog\Logger::DEBUG,
+                    'bubble' => true
+                ],
+                'formatter' => [
+                    'name' => 'Monolog\Formatter\LogstashFormatter',
+                    'args' => [
+                        'application' => 'Blurgroup/Blur',
+                    ]
+                ]
+            ]
+        ]
+    ],
+    'Blur\Service\Monolog\Exception' => [
+        'name' => 'Exception Logger',
+        'handlers' => [
+            'default' => [
+                'name' => 'Monolog\Handler\StreamHandler',
+                'args' => [
+                    'path' => 'data/log/exception.log',
+                    'level' => \Monolog\Logger::DEBUG,
+                    'bubble' => true
+                ],
+                'formatter' => [
+                    'name' => 'Monolog\Formatter\LogstashFormatter',
+                    'args' => [
+                        'application' => 'Blur',
+                    ]
+                ]
+            ]
+        ]
+    ],
+    'MyChromeLogger' => [
+        'name' => 'Chrome Logger',
+        'handlers' => [
+            [
+                'name' => 'Monolog\Handler\ChromePHPHandler',
+            ]
+        ]
+    ]
+
+
 ];
 
 //keLog::config('logstash', array(

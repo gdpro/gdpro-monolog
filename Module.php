@@ -3,16 +3,47 @@ namespace GdproMonolog;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use GdproMonolog\Listener\OnDispatchErrorListener;
+use GdproMonolog\Listener\OnRenderErrorListener;
 
 class Module
 {
     public function onBootstrap(MvcEvent $e)
     {
-        $eventManager        = $e->getApplication()->getEventManager();
-        $moduleRouteListener = new ModuleRouteListener();
-        $moduleRouteListener->attach($eventManager);
+        $eventManager = $e->getApplication()->getEventManager();
+//        $moduleRouteListener = new ModuleRouteListener();
+//        $moduleRouteListener->attach($eventManager);
 
-//        $eventManager->attach(new MonologListener());
+        $eventManager ->attach(new OnDispatchErrorListener());
+        $eventManager ->attach(new OnRenderErrorListener());
+
+
+//        $eventManager->attach('dispatch.error', function($event){
+//               var_dump('DISPATCH ERROR'); exit;
+//
+//                $exception = $event->getResult()->exception;
+//                if ($exception) {
+//                    $sm = $event->getApplication()->getServiceManager();
+//                    $service = $sm->get('ApplicationServiceErrorHandling');
+//                    $service->logException($exception);
+//                }
+//            });
+//
+//        $eventManager->attach('render.error', function($event){
+//                var_dump('DISPATCH ERROR'); exit;
+//
+//                $exception = $event->getResult()->exception;
+//                if ($exception) {
+//                    $sm = $event->getApplication()->getServiceManager();
+//                    $service = $sm->get('ApplicationServiceErrorHandling');
+//                    $service->logException($exception);
+//                }
+//            });
+
+
+
+
+//        $eventManager ->attach(new MonologListener());
     }
 
     public function getConfig()
@@ -25,7 +56,7 @@ class Module
         return array(
             'Zend\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
-                    __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
+                    __NAMESPACE__ => __DIR__ . '/src',
                 ),
             ),
         );
