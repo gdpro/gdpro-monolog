@@ -1,9 +1,5 @@
 <?php
 return [
-    'monolog' => [
-
-    ],
-
     'Blur\Service\Monolog\Default' => [
         'name' => 'Default Logger',
         'handlers' => [
