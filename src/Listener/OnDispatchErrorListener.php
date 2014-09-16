@@ -37,25 +37,25 @@ class OnDispatchErrorListener implements ListenerAggregateInterface
     public function onDispatchError(MvcEvent $e)
     {
 
-        var_dump($e->isError());
-        exit;
-
-        $this->
-
-            // create a log channel
-            $log = new Logger('DISPATCH-ERROR');
-        $log->pushHandler(
-            new StreamHandler('data/log/default-error.log', Logger::ERROR)
-        );
-
-        $resultVariables = $e->getResult()->getVariables();
-
-        // add records to the log
-        $log->addError('Request URI: ' . $e->getRequest()->getRequestUri());
-        $log->addError(
-            'Exception: ' . $resultVariables['exception']->getMessage()
-        );
-        $log->addError($e->getError());
+//        var_dump($e->isError());
+//        exit;
+//
+//
+//
+//            // create a log channel
+//            $log = new Logger('DISPATCH-ERROR');
+//        $log->pushHandler(
+//            new StreamHandler('data/log/default-error.log', Logger::ERROR)
+//        );
+//
+//        $resultVariables = $e->getResult()->getVariables();
+//
+//        // add records to the log
+//        $log->addError('Request URI: ' . $e->getRequest()->getRequestUri());
+//        $log->addError(
+//            'Exception: ' . $resultVariables['exception']->getMessage()
+//        );
+//        $log->addError($e->getError());
     }
 
 

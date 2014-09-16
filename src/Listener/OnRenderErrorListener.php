@@ -36,16 +36,15 @@ class OnRenderErrorListener implements ListenerAggregateInterface
 
     public function onRenderError(MvcEvent $e)
     {
-        var_dump('on render error'); exit;
-        // create a log channel
-        $log = new Logger('RENDER-ERROR');
-        $log->pushHandler(new StreamHandler('data/log/default-error.log', Logger::ERROR));
-
-        $resultVariables = $e->getResult()->getVariables();
-
-        // add records to the log
-        $log->addError('Request URI: '.$e->getRequest()->getRequestUri());
-        $log->addError('Exception: '.$resultVariables['exception']->getMessage());
-        $log->addError($e->getError());
+//        // create a log channel
+//        $log = new Logger('RENDER-ERROR');
+//        $log->pushHandler(new StreamHandler('data/log/default-error.log', Logger::ERROR));
+//
+//        $resultVariables = $e->getResult()->getVariables();
+//
+//        // add records to the log
+//        $log->addError('Request URI: '.$e->getRequest()->getRequestUri());
+//        $log->addError('Exception: '.$resultVariables['exception']->getMessage());
+//        $log->addError($e->getError());
     }
 }
