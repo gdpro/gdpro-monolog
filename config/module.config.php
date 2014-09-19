@@ -1,148 +1,77 @@
 <?php
 return [
-    'Blur\Service\Monolog\Default' => [
-        'name' => 'Default Logger',
+    'gdpro_monolog' => [
+        'formatters' => [
+            'default' => [
+                'class' => 'LineFormatter',
+            ]
+        ],
+
         'handlers' => [
             'default' => [
-                'name' => 'Monolog\Handler\StreamHandler',
+                'class' => 'StreamHandler',
                 'args' => [
-                    'path' => 'data/log/default.log',
+                    'stream' =>  'data/log/default.log',
+                    // The minimum logging level at which this handler will be triggered
                     'level' => \Monolog\Logger::DEBUG,
+                    // Whether the messages that are handled can bubble up the stack or not
+                    'bubble' => true,
+                    // Optional, file permissions (default (0644) are only for owner read/write)
+                    'file_permission' => 0777,
+                    // Try to lock log file before doing any writes
+                    'user_locking' => false
+                ],
+                'formatter' => 'default'
+            ],
+
+            'hipchat' => [
+                'class' => 'HipChatHandler',
+                'args' => [
+                    // HipChat API token
+                    'token' => '39e5dc0282a53887240c2673ee0277',
+                    // Name used to send the message (from)
+                    'name' => 'socialcar',
+                    // HipChat Room Id or name, where messages are sent
+                    'room' => 'socialcar',
+                    // Should the message trigger a notification in the clients
+                    'notify' => true,
+                    // The minimum logging level at which this handler will be triggered
+                    'level' => \Monolog\Logger::DEBUG,
+                    // Whether the messages that are handled can bubble up the stack or not
                     'bubble' => true
                 ],
-                'formatter' => [
-                    'name' => 'Monolog\Formatter\LogstashFormatter',
-                    'args' => [
-                        'application' => 'Blurgroup/Blur',
-                    ]
-                ]
+                'formatter' => 'default'
             ]
-        ]
-    ],
-    'Blur\Service\Monolog\Exception' => [
-        'name' => 'Exception Logger',
-        'handlers' => [
+        ],
+
+        'loggers' => [
             'default' => [
-                'name' => 'Monolog\Handler\StreamHandler',
-                'args' => [
-                    'path' => 'data/log/exception.log',
-                    'level' => \Monolog\Logger::DEBUG,
-                    'bubble' => true
-                ],
-                'formatter' => [
-                    'name' => 'Monolog\Formatter\LogstashFormatter',
-                    'args' => [
-                        'application' => 'Blur',
-                    ]
+                'name' => 'Default Logger',
+                'handlers' => [
+                    'default',
+                    'hipchat'
                 ]
-            ]
+            ],
+//            'exception' => [
+//                'name' => 'Exception Logger',
+//                'handlers' => [
+//                    'default',
+//                    'hipchat'
+//                ]
+//            ],
+//            'hipchat' => [
+//                'name' => 'Hipchat Logger',
+//                'handlers' => [
+//                    'default',
+//                    'hipchat'
+//                ]
+//            ]
         ]
     ],
-    'MyChromeLogger' => [
-        'name' => 'Chrome Logger',
-        'handlers' => [
-            [
-                'name' => 'Monolog\Handler\ChromePHPHandler',
-            ]
+
+    'service_manager' => [
+        'factories' => [
+            'gdpro_monolog.manager' => 'GdproMonolog\Factory\MonologManagerFactory'
         ]
     ]
-
-
 ];
-
-//keLog::config('logstash', array(
-//    'engine' => 'Monolog.Monolog',
-//    'channel' => 'app',
-//    'handlers' => array(
-//        'RotatingFile' => array(
-//            LOGS . 'logstash.log',
-//            30,
-//            'formatters' => array(
-//                'Logstash' => array('web', env('SERVER_ADDR'))
-//            ),
-//            'processors' => array('MemoryPeakUsage')
-//        ),
-//        'Stream' => array(
-//            LOGS . 'logstash.log',
-//            'formatters' => array(
-//                'Line' => array("%datetime% %channel% %level_name%: %message% %context% %extra%\n")
-//            ),
-//            'processors' => array('MemoryUsage', 'Web')
-//        ),
-//        'CakeEmail' => array(
-//            'admin@domain.com',
-//            'ALERT: APPLICATION REQUIRES IMMEDIATE ATTENTION.',
-//            'default'
-//        )
-//    )
-//));
-
-
-// OLD CONFIG OF MY OTEHR MODULE
-//return [
-//    'log_trace_tiguada_options' => [
-//        'name' => 'Trace Logger for Tiguada',
-//        'handlers' => [
-//            'default' => [
-//                'name' => 'Monolog\Handler\StreamHandler',
-//                'args' => [
-//                    'path' => 'data/log/tiguada.trace.log',
-//                    'level' => \Monolog\Logger::INFO,
-//                    'bubble' => true
-//                ],
-//                'formatter' => [
-//                    'name' => 'Monolog\Formatter\LogstashFormatter',
-//                    'args' => [
-//                        'application' => 'Tiguada',
-//                    ]
-//                ]
-//            ]
-//        ]
-//    ],
-//    '\Service\Monolog\Default' => [
-//        'name' => 'Default Logger',
-//        'handlers' => [
-//            'default' => [
-//                'name' => 'Monolog\Handler\StreamHandler',
-//                'args' => [
-//                    'path' => 'data/log/default.log',
-//                    'level' => \Monolog\Logger::DEBUG,
-//                    'bubble' => true
-//                ],
-//                'formatter' => [
-//                    'name' => 'Monolog\Formatter\LogstashFormatter',
-//                    'args' => [
-//                        'application' => 'Blurgroup/Blur',
-//                    ]
-//                ]
-//            ]
-//        ]
-//    ],
-//    '\Service\Monolog\Exception' => [
-//        'name' => 'Exception Logger',
-//        'handlers' => [
-//            'default' => [
-//                'name' => 'Monolog\Handler\StreamHandler',
-//                'args' => [
-//                    'path' => 'data/log/exception.log',
-//                    'level' => \Monolog\Logger::DEBUG,
-//                    'bubble' => true
-//                ],
-//                'formatter' => [
-//                    'name' => 'Monolog\Formatter\LogstashFormatter',
-//                    'args' => [
-//                        'application' => 'Blur',
-//                    ]
-//                ]
-//            ]
-//        ]
-//    ],
-//    'MyChromeLogger' => [
-//        'name' => 'Chrome Logger',
-//        'handlers' => [
-//            [
-//                'name' => 'Monolog\Handler\ChromePHPHandler',
-//            ]
-//        ]
-//    ]
-//];

@@ -14,8 +14,8 @@ class Module
 //        $moduleRouteListener = new ModuleRouteListener();
 //        $moduleRouteListener->attach($eventManager);
 
-        $eventManager ->attach(new OnDispatchErrorListener());
-        $eventManager ->attach(new OnRenderErrorListener());
+//        $eventManager ->attach(new OnDispatchErrorListener());
+//        $eventManager ->attach(new OnRenderErrorListener());
 
 
 //        $eventManager->attach('dispatch.error', function($event){
