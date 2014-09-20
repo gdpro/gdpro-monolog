@@ -1,7 +1,7 @@
 <?php
 namespace GdproMonolog\Config;
 
-class FormatterConfig
+class LoggerConfig
 {
     protected $config;
 

@@ -35,18 +35,4 @@ return [
             'stream' =>  'data/log/slow_response_time.log'
         ]
     ],
-
-    'hipchat' => [
-        'class' => 'HipChatHandler',
-        'args' => [
-            // HipChat API token
-            'token' => '39e5dc0282a53887240c2673ee0277',
-            // Name used to send the message (from)
-            'name' => 'socialcar',
-            // HipChat Room Id or name, where messages are sent
-            'room' => 'socialcar',
-            // Should the message trigger a notification in the clients
-            'notify' => true,
-        ],
-    ]
 ];

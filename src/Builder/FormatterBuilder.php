@@ -1,6 +1,10 @@
 <?php
 namespace GdproMonolog\Builder;
 
+/**
+ * Class FormatterBuilder
+ * @package GdproMonolog\Builder
+ */
 class FormatterBuilder
 {
     public function build($class, $args)

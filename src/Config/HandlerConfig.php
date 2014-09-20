@@ -1,7 +1,7 @@
 <?php
 namespace GdproMonolog\Config;
 
-class HandlerConfig extends \ArrayObject
+class HandlerConfig
 {
     protected $config;
 

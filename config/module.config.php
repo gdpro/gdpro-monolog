@@ -30,11 +30,12 @@ return [
         ],
         'factories' => [
             // Manager
-            'gdpro_monolog.manager' => 'GdproMonolog\Factory\MonologManagerFactory',
+            'gdpro_monolog.manager' => 'GdproMonolog\Factory\LoggerManagerFactory',
             'gdpro_monolog.manager.handler' => 'GdproMonolog\Factory\HandlerManagerFactory',
             'gdpro_monolog.manager.formatter' => 'GdproMonolog\Factory\FormatterManagerFactory',
 
             // Config
+            'gdpro_monolog.config.logger' => 'GdproMonolog\Factory\Config\LoggerConfigFactory',
             'gdpro_monolog.config.handler' => 'GdproMonolog\Factory\Config\HandlerConfigFactory',
             'gdpro_monolog.config.formatter' => 'GdproMonolog\Factory\Config\FormatterConfigFactory',
 

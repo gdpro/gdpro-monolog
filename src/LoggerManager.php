@@ -1,31 +1,36 @@
 <?php
 namespace GdproMonolog;
 
+use GdproMonolog\Config\LoggerConfig;
 use Monolog\Logger;
 
-class MonologManager
+class LoggerManager
 {
-    protected $config;
+    protected $registeredLoggers = [];
+
+    protected $loggerConfig;
+
     protected $handlerManager;
+
     protected $formatterManager;
 
     public function __construct(
-        array $config,
+        LoggerConfig $loggerConfig,
         HandlerManager $handlerManager,
         FormatterManager $formatterManager
     ) {
-        $this->config = $config;
+        $this->loggerConfig = $loggerConfig;
         $this->handlerManager = $handlerManager;
         $this->formatterManager = $formatterManager;
     }
 
     public function get($name = 'default')
     {
-        if(!isset($this->config['loggers'][$name])) {
-            $name = 'default';
+        if(isset($this->registeredLoggers[$name])) {
+            return $this->registeredLoggers[$name];
         }
 
-        $loggerConfig = $this->config['loggers'][$name];
+        $loggerConfig = $this->loggerConfig->get($name);
 
         $handlers = [];
         $handlerNames = $loggerConfig['handlers'];
@@ -35,19 +40,20 @@ class MonologManager
             $handlers[] = $handler;
         }
 
-        $processorNames = null;
+        $processors = [];
         if(isset($loggerConfig['processors'])) {
             $processorNames = $loggerConfig['processors'];
-        }
 
-        $processors = [];
-        foreach($processorNames as $processorName) {
-            $processorFQCN = '\\Monolog\\Processor\\'.$processorName;
-            $processor = new $processorFQCN();
-            $processors[] = $processor;
+            foreach($processorNames as $processorName) {
+                $processorFQCN = '\\Monolog\\Processor\\'.$processorName;
+                $processor = new $processorFQCN();
+                $processors[] = $processor;
+            }
         }
 
         $logger = new Logger($loggerConfig['name'], $handlers, $processors);
+
+        $this->registeredLoggers[$name] = $logger;
 
         return $logger;
     }

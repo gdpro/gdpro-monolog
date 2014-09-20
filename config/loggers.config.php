@@ -5,7 +5,6 @@ return [
         'name' => 'Default Logger',
         'handlers' => [
             'default',
-            'hipchat'
         ]
     ],
 
@@ -13,7 +12,6 @@ return [
         'name' => 'Slow response time',
         'handlers' => [
             'slow_response_time',
-            'hipchat'
         ],
         'processors' => [
             'WebProcessor'
@@ -24,7 +22,6 @@ return [
         'name' => 'Render',
         'handlers' => [
             'render_error',
-            'hipchat'
         ],
         'processors' => [
             'WebProcessor'
@@ -35,7 +32,6 @@ return [
         'name' => 'Dispatch',
         'handlers' => [
             'dispatch_error',
-            'hipchat'
         ],
         'processors' => [
             'WebProcessor'
