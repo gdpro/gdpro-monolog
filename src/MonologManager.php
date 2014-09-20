@@ -1,34 +1,28 @@
 <?php
 namespace GdproMonolog;
 
-use GdproMonolog\Factory\FormatterFactory;
-use GdproMonolog\Factory\HandlerFactory;
-use GdproMonolog\Factory\LoggerFactory;
 use Monolog\Logger;
 
 class MonologManager
 {
     protected $config;
-    protected $handlerFactory;
-    protected $formatterFactory;
-    protected $loggerFactory;
+    protected $handlerManager;
+    protected $formatterManager;
 
     public function __construct(
         array $config,
-        HandlerFactory $handlerFactory,
-        FormatterFactory $formatterFactory,
-        LoggerFactory $loggerFactory
+        HandlerManager $handlerManager,
+        FormatterManager $formatterManager
     ) {
         $this->config = $config;
-        $this->handlerFactory = $handlerFactory;
-        $this->formatterFactory = $formatterFactory;
-        $this->loggerFactory = $loggerFactory;
+        $this->handlerManager = $handlerManager;
+        $this->formatterManager = $formatterManager;
     }
 
     public function get($name = 'default')
     {
         if(!isset($this->config['loggers'][$name])) {
-            return null;
+            $name = 'default';
         }
 
         $loggerConfig = $this->config['loggers'][$name];
@@ -36,20 +30,7 @@ class MonologManager
         $handlers = [];
         $handlerNames = $loggerConfig['handlers'];
         foreach($handlerNames as $handlerName) {
-            $handlerConfig = $this->config['handlers'][$handlerName];
-
-            $handler = $this->handlerFactory->create($handlerConfig);
-
-            if(!isset($handler)) continue;
-
-            $formatterName =  $handlerConfig['formatter'];
-            $formatterConfig = $this->config['formatters'][$formatterName];
-
-            $formatter = $this->formatterFactory->create($formatterConfig);
-
-            if(isset($formatter)) {
-                $handler->setFormatter($formatter);
-            }
+            $handler = $this->handlerManager->get($handlerName);
 
             $handlers[] = $handler;
         }

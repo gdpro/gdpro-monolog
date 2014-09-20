@@ -2,17 +2,30 @@
 namespace GdproMonolog\Listener;
 
 use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\MvcEvent;
 
-class OnRenderErrorListener implements ListenerAggregateInterface
+class LogRenderErrorListener implements ListenerAggregateInterface
 {
+    /**
+     * @var \Monolog\Logger
+     */
+    protected $logger;
+
     /**
      * @var \Zend\Stdlib\CallbackHandler[]
      */
-    protected $listeners = array();
+    protected $listeners = [];
+
+    /**
+     * Constructor
+     * @param Logger $logger
+     */
+    public function __construct(Logger $logger)
+    {
+        $this->logger = $logger;
+    }
 
     /**
      * {@inheritDoc}
@@ -36,15 +49,10 @@ class OnRenderErrorListener implements ListenerAggregateInterface
 
     public function onRenderError(MvcEvent $e)
     {
-//        // create a log channel
-//        $log = new Logger('RENDER-ERROR');
-//        $log->pushHandler(new StreamHandler('data/log/default-error.log', Logger::ERROR));
-//
-//        $resultVariables = $e->getResult()->getVariables();
-//
-//        // add records to the log
-//        $log->addError('Request URI: '.$e->getRequest()->getRequestUri());
-//        $log->addError('Exception: '.$resultVariables['exception']->getMessage());
-//        $log->addError($e->getError());
+        $resultVariables = $e->getResult()->getVariables();
+
+        $message = $resultVariables['exception']->getMessage();
+
+        $this->logger->error($message);
     }
 }

@@ -13,9 +13,12 @@ class MonologManagerFactory implements FactoryInterface
 
         return new \GdproMonolog\MonologManager(
             $gdproMonologConfig,
-            new HandlerFactory(),
-            new FormatterFactory(),
-            new LoggerFactory()
+            $services->get('gdpro_monolog.manager.handler'),
+//            new HandlerFactory(),
+            $services->get('gdpro_monolog.manager.formatter')
+//            new FormatterFactory(),
+//            $services->get('gdpro_monolog.builder.logger')
+//            new LoggerFactory()
         );
     }
 }

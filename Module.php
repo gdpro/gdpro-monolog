@@ -11,39 +11,13 @@ class Module
     public function onBootstrap(MvcEvent $e)
     {
         $eventManager = $e->getApplication()->getEventManager();
-//        $moduleRouteListener = new ModuleRouteListener();
-//        $moduleRouteListener->attach($eventManager);
+        $services = $e->getApplication()->getServiceManager();
+        $moduleRouteListener = new ModuleRouteListener();
+        $moduleRouteListener->attach($eventManager);
 
-//        $eventManager ->attach(new OnDispatchErrorListener());
-//        $eventManager ->attach(new OnRenderErrorListener());
-
-
-//        $eventManager->attach('dispatch.error', function($event){
-//               var_dump('DISPATCH ERROR'); exit;
-//
-//                $exception = $event->getResult()->exception;
-//                if ($exception) {
-//                    $sm = $event->getApplication()->getServiceManager();
-//                    $service = $sm->get('ApplicationServiceErrorHandling');
-//                    $service->logException($exception);
-//                }
-//            });
-//
-//        $eventManager->attach('render.error', function($event){
-//                var_dump('DISPATCH ERROR'); exit;
-//
-//                $exception = $event->getResult()->exception;
-//                if ($exception) {
-//                    $sm = $event->getApplication()->getServiceManager();
-//                    $service = $sm->get('ApplicationServiceErrorHandling');
-//                    $service->logException($exception);
-//                }
-//            });
-
-
-
-
-//        $eventManager ->attach(new MonologListener());
+        $eventManager->attachAggregate($services->get('gdpro_monolog.listener.check_slow_response_time'));
+        $eventManager->attachAggregate($services->get('gdpro_monolog.listener.log_render_error'));
+        $eventManager->attachAggregate($services->get('gdpro_monolog.listener.log_dispatch_error'));
     }
 
     public function getConfig()

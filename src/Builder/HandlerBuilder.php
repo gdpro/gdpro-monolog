@@ -1,21 +1,15 @@
 <?php
-namespace GdproMonolog\Factory;
+namespace GdproMonolog\Builder;
 
-class HandlerFactory
+class HandlerBuilder
 {
-    public function create($config)
+    public function build($class, $args)
     {
-        $handlerClass = $config['class'];
-        $handlerFQCN = '\\Monolog\\Handler\\'.$handlerClass;
-
-        $args = null;
-        if(isset($config['args'])) {
-            $args = $config['args'];
-        }
+        $FQCN = '\\Monolog\\Handler\\'.$class;
 
         /** @var \Monolog\Handler\AbstractHandler $handler */
-        if($handlerClass == 'StreamHandler') {
-            $handler = new $handlerFQCN(
+        if($class == 'StreamHandler') {
+            $handler = new $FQCN(
                 $args['stream'],
                 $args['level'],
                 $args['bubble'],
@@ -26,8 +20,8 @@ class HandlerFactory
             return $handler;
         }
 
-        if($handlerClass == 'HipChatHandler') {
-            $handler = new $handlerFQCN(
+        if($class == 'HipChatHandler') {
+            $handler = new $FQCN(
                 $args['token'],
                 $args['name'],
                 $args['room'],
