@@ -2,6 +2,7 @@
 namespace GdproMonolog;
 
 use GdproMonolog\Config\LoggerConfig;
+use GdproMonolog\Proxy\LoggerProxy;
 use Monolog\Logger;
 
 class LoggerManager

@@ -6,8 +6,19 @@ use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\MvcEvent;
 
-class LogDispatchErrorListener implements ListenerAggregateInterface
+class CheckSlowResponseTimeListener implements ListenerAggregateInterface
 {
+    /**
+     * @var $startTime
+     */
+    protected $startTime;
+
+    /**
+     * Set the limit of time acceptable for the request
+     * @var $limit
+     */
+    protected $threshold;
+
     /**
      * @var \Monolog\Logger
      */
@@ -19,19 +30,23 @@ class LogDispatchErrorListener implements ListenerAggregateInterface
     protected $listeners = [];
 
     /**
-     *
+     * Constructor
+     * @param $threshold
      * @param Logger $logger
      */
-    public function __construct(Logger $logger)
+    public function __construct($threshold, Logger $logger)
     {
+        $this->threshold = $threshold;
         $this->logger = $logger;
+        $this->startTime = microtime(true);
     }
+
     /**
      * {@inheritDoc}
      */
     public function attach(EventManagerInterface $events)
     {
-        $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, [$this, 'onDispatchError']);
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_FINISH, [$this, 'onFinish']);
     }
 
     public function detach(EventManagerInterface $events)
@@ -43,14 +58,10 @@ class LogDispatchErrorListener implements ListenerAggregateInterface
         }
     }
 
-    public function onDispatchError(MvcEvent $e)
+    public function onFinish(MvcEvent $e)
     {
-        $response = $e->getResponse();
+        $message = memory_get_usage();
 
-        if($response instanceof \Zend\Console\Response) {
-           return;
-        }
-
-        $this->logger->error($e->getResponse()->getStatusCode());
+        $this->logger->info($message);
     }
 }

@@ -5,7 +5,7 @@ return [
             'check_slow_response_time' => [
                 'logger' => 'slow_response_time',
                 // Response time limit in micro seconds
-                'threshold' => '700'
+                'threshold' => '1000'
             ],
 
             'log_dispatch_error' => [
