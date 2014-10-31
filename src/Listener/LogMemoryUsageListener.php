@@ -6,7 +6,8 @@ use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\MvcEvent;
 
-class CheckSlowResponseTimeListener implements ListenerAggregateInterface
+// TODO: CLASS
+class LogMemoryUsageListener implements ListenerAggregateInterface
 {
     /**
      * @var $startTime
@@ -36,7 +37,6 @@ class CheckSlowResponseTimeListener implements ListenerAggregateInterface
      */
     public function __construct($threshold, Logger $logger)
     {
-        $this->threshold = $threshold;
         $this->logger = $logger;
         $this->startTime = microtime(true);
     }

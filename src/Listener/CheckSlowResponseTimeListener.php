@@ -67,7 +67,9 @@ class CheckSlowResponseTimeListener implements ListenerAggregateInterface
         if($elapsedTime > $this->threshold) {
             $message = sprintf("%.0fms", $elapsedTime);
 
-            $this->logger->info($message);
+            try {
+                $this->logger->info($message);
+            } catch(\Exception $e) {}
         }
     }
 }
