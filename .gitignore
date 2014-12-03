@@ -1,2 +1,6 @@
-.idea/
-vendor/
+.buildpath
+.project
+.settings/
+.DS_Store
+vendor
+composer.phar
