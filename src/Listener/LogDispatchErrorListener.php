@@ -56,12 +56,12 @@ class LogDispatchErrorListener implements ListenerAggregateInterface
      */
     public function onDispatchError(MvcEvent $e)
     {
-        $response = $e->getResponse();
+        $exception = $e->getParam('exception');
 
-        if($response instanceof \Zend\Console\Response) {
-           return;
+        if(!$exception instanceof \Exception) {
+            return;
         }
 
-        $this->logger->error($e->getResponse()->getStatusCode());
+        $this->logger->error($exception->getTraceAsString());
     }
 }
