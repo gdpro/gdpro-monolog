@@ -4,30 +4,27 @@ return [
     'default' => [
         'name' => 'Default Logger',
         'handlers' => [
-            'default',
+            'default'
         ]
     ],
-
     'slow_response_time' => [
         'name' => 'Slow response time',
         'handlers' => [
-            'slow_response_time',
+            'slow_response_time'
         ],
         'processors' => [
             'WebProcessor'
         ]
     ],
-
     'render_error' => [
         'name' => 'Render',
         'handlers' => [
-            'render_error',
+            'render_error'
         ],
         'processors' => [
             'WebProcessor'
         ]
     ],
-
     'dispatch_error' => [
         'name' => 'Dispatch',
         'handlers' => [

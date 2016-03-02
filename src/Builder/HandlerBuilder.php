@@ -1,27 +1,34 @@
 <?php
+
 namespace GdproMonolog\Builder;
 
+/**
+ * Class HandlerBuilder
+ * @package GdproMonolog\Builder
+ */
 class HandlerBuilder
 {
+    /**
+     * @param $class
+     * @param $args
+     * @return mixed
+     */
     public function build($class, $args)
     {
         $FQCN = '\\Monolog\\Handler\\'.$class;
 
-        /** @var \Monolog\Handler\AbstractHandler $handler */
         if($class == 'StreamHandler') {
-            $handler = new $FQCN(
+            return new $FQCN(
                 $args['stream'],
                 $args['level'],
                 $args['bubble'],
                 $args['file_permission'],
                 $args['user_locking']
             );
-
-            return $handler;
         }
 
         if($class == 'HipChatHandler') {
-            $handler = new $FQCN(
+            return new $FQCN(
                 $args['token'],
                 $args['name'],
                 $args['room'],
@@ -29,10 +36,6 @@ class HandlerBuilder
                 $args['level'],
                 $args['bubble']
             );
-
-            return $handler;
         }
-
-        return null;
     }
 }

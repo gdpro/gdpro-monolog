@@ -1,4 +1,5 @@
 <?php
+
 namespace GdproMonolog\Listener;
 
 use GdproMonolog\Exception\LoggingException;
@@ -7,6 +8,10 @@ use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\MvcEvent;
 
+/**
+ * Class CheckSlowResponseTimeListener
+ * @package GdproMonolog\Listener
+ */
 class CheckSlowResponseTimeListener implements ListenerAggregateInterface
 {
     /**
@@ -50,6 +55,9 @@ class CheckSlowResponseTimeListener implements ListenerAggregateInterface
         $this->listeners[] = $events->attach(MvcEvent::EVENT_FINISH, [$this, 'onFinish']);
     }
 
+    /**
+     * @param EventManagerInterface $events
+     */
     public function detach(EventManagerInterface $events)
     {
         foreach ($this->listeners as $index => $listener) {
@@ -59,11 +67,13 @@ class CheckSlowResponseTimeListener implements ListenerAggregateInterface
         }
     }
 
+    /**
+     * @param MvcEvent $e
+     */
     public function onFinish(MvcEvent $e)
     {
-        $endTime = microtime(true);
-
-        $elapsedTime = ($endTime - $this->startTime) * 1000;
+        $endTime        = microtime(true);
+        $elapsedTime    = ($endTime - $this->startTime) * 1000;
 
         if($elapsedTime > $this->threshold) {
             $message = sprintf("%.0fms", $elapsedTime);
@@ -71,7 +81,7 @@ class CheckSlowResponseTimeListener implements ListenerAggregateInterface
             try {
                 $this->logger->info($message);
             } catch(\Exception $e) {
-                $message = 'An Exception happenned while logging message for CheckSlowRespondTimeListener on action onFinish'
+                $message = 'An Exception happenned while logging message for CheckSlowRespondTimeListener on action onFinish';
                 throw new LoggingException($message, 500, $e);
             }
         }

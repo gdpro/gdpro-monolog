@@ -1,4 +1,5 @@
 <?php
+
 namespace GdproMonolog\Exception;
 
 use Exception;

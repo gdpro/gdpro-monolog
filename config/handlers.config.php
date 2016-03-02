@@ -1,5 +1,4 @@
 <?php
-// Handlers
 return [
     // Default define the default value for all you handlers. So please do not delete
     'default' => [
@@ -17,22 +16,19 @@ return [
         ],
         'formatter' => 'default'
     ],
-
     'render_error' => [
         'args' => [
             'stream' =>  'data/log/render_error.log'
         ]
     ],
-
     'dispatch_error' => [
         'args' => [
             'stream' =>  'data/log/dispatch_error.log'
         ]
     ],
-
     'slow_response_time' => [
         'args' => [
             'stream' =>  'data/log/slow_response_time.log'
         ]
-    ],
+    ]
 ];

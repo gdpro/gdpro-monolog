@@ -1,4 +1,5 @@
 <?php
+
 namespace GdproMonolog\Listener;
 
 use Monolog\Logger;
@@ -6,6 +7,10 @@ use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\MvcEvent;
 
+/**
+ * Class LogDispatchErrorListener
+ * @package GdproMonolog\Listener
+ */
 class LogDispatchErrorListener implements ListenerAggregateInterface
 {
     /**
@@ -34,6 +39,9 @@ class LogDispatchErrorListener implements ListenerAggregateInterface
         $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH_ERROR, [$this, 'onDispatchError']);
     }
 
+    /**
+     * @param EventManagerInterface $events
+     */
     public function detach(EventManagerInterface $events)
     {
         foreach ($this->listeners as $index => $listener) {
@@ -43,6 +51,9 @@ class LogDispatchErrorListener implements ListenerAggregateInterface
         }
     }
 
+    /**
+     * @param MvcEvent $e
+     */
     public function onDispatchError(MvcEvent $e)
     {
         $response = $e->getResponse();

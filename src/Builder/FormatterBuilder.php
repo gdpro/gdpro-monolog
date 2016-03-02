@@ -1,4 +1,5 @@
 <?php
+
 namespace GdproMonolog\Builder;
 
 /**
@@ -7,20 +8,21 @@ namespace GdproMonolog\Builder;
  */
 class FormatterBuilder
 {
+    /**
+     * @param $class
+     * @param $args
+     * @return mixed
+     */
     public function build($class, $args)
     {
         $FQCN = '\\Monolog\\Formatter\\'.$class;
 
         if($class == 'LogstashFormatter') {
-            $formatter = new $FQCN($args['application']);
-            return $formatter;
+            return new $FQCN($args['application']);
         }
 
         if($class == 'LineFormatter') {
-            $formatter = new $FQCN();
-            return $formatter;
+            return new $FQCN();
         }
-
-        return null;
     }
 }

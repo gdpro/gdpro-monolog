@@ -1,4 +1,5 @@
 <?php
+
 namespace GdproMonolog\Listener;
 
 use Monolog\Logger;
@@ -6,6 +7,10 @@ use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\MvcEvent;
 
+/**
+ * Class LogRenderErrorListener
+ * @package GdproMonolog\Listener
+ */
 class LogRenderErrorListener implements ListenerAggregateInterface
 {
     /**
@@ -38,6 +43,9 @@ class LogRenderErrorListener implements ListenerAggregateInterface
         );
     }
 
+    /**
+     * @param EventManagerInterface $events
+     */
     public function detach(EventManagerInterface $events)
     {
         foreach ($this->listeners as $index => $listener) {
@@ -47,11 +55,13 @@ class LogRenderErrorListener implements ListenerAggregateInterface
         }
     }
 
+    /**
+     * @param MvcEvent $e
+     */
     public function onRenderError(MvcEvent $e)
     {
-        $resultVariables = $e->getResult()->getVariables();
-
-        $message = $resultVariables['exception']->getMessage();
+        $resultVariables    = $e->getResult()->getVariables();
+        $message            = $resultVariables['exception']->getMessage();
 
         $this->logger->error($message);
     }
