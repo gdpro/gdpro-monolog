@@ -1,6 +1,7 @@
 <?php
 namespace GdproMonolog\Listener;
 
+use GdproMonolog\Exception\LoggingException;
 use Monolog\Logger;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
@@ -69,7 +70,10 @@ class CheckSlowResponseTimeListener implements ListenerAggregateInterface
 
             try {
                 $this->logger->info($message);
-            } catch(\Exception $e) {}
+            } catch(\Exception $e) {
+                $message = 'An Exception happenned while logging message for CheckSlowRespondTimeListener on action onFinish'
+                throw new LoggingException($message, 500, $e);
+            }
         }
     }
 }
