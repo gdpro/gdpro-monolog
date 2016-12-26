@@ -1,5 +1,4 @@
 <?php
-
 namespace GdproMonolog\Factory;
 
 use Zend\ServiceManager\FactoryInterface;

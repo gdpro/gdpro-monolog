@@ -16,7 +16,12 @@
     },
     "require-dev": {
         "phpunit/phpunit": "~4.3",
-        "monolog/monolog": "^1.22"
+        "monolog/monolog": "^1.22",
+        "zend/zend-stdlib": "^3.1",
+        "zend/zend-modulemanager": "^2.7",
+        "zend/zend-servicemanager": "^3.2",
+        "zend/zend-eventmanager": "^3.1",
+        "zend/zend-mvc": "^3.0"
     },
     "autoload": {
         "psr-4": {

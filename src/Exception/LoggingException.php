@@ -1,8 +1,6 @@
 <?php
-
 namespace GdproMonolog\Exception;
 
-use Exception;
 use Zend\Stdlib\Exception\RuntimeException;
 
 /**

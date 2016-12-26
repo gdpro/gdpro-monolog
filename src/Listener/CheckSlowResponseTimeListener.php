@@ -1,5 +1,4 @@
 <?php
-
 namespace GdproMonolog\Listener;
 
 use GdproMonolog\Exception\LoggingException;

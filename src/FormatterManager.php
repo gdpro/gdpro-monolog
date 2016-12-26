@@ -1,5 +1,4 @@
 <?php
-
 namespace GdproMonolog;
 
 use GdproMonolog\Builder\FormatterBuilder;
