@@ -30,7 +30,7 @@ class LogRenderErrorListener implements ListenerAggregateInterface
     {
         $this->listeners[] = $events->attach(
             MvcEvent::EVENT_RENDER_ERROR,
-            array($this, 'onRenderError')
+            [$this, 'onRenderError']
         );
     }
 

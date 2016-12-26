@@ -50,7 +50,7 @@ class LogDispatchErrorListener implements ListenerAggregateInterface
     {
         $exception = $e->getParam('exception');
 
-        if(!$exception instanceof \Exception) {
+        if (! $exception instanceof \Exception) {
             return;
         }
 

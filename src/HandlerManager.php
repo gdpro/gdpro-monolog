@@ -77,4 +77,3 @@ class HandlerManager
         $this->formatterManager = $formatterManager;
     }
 }
-

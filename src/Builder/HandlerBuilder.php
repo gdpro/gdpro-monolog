@@ -17,7 +17,7 @@ class HandlerBuilder
     {
         $FQCN = '\\Monolog\\Handler\\'.$class;
 
-        if($class == 'StreamHandler') {
+        if ($class == 'StreamHandler') {
             return new $FQCN(
                 $args['stream'],
                 $args['level'],
@@ -27,7 +27,7 @@ class HandlerBuilder
             );
         }
 
-        if($class == 'HipChatHandler') {
+        if ($class == 'HipChatHandler') {
             return new $FQCN(
                 $args['token'],
                 $args['name'],

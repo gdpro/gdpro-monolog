@@ -38,7 +38,7 @@ class LoggerManager
      */
     public function get($name = 'default')
     {
-        if(isset($this->registeredLoggers[$name])) {
+        if (isset($this->registeredLoggers[$name])) {
             return $this->registeredLoggers[$name];
         }
 
@@ -46,16 +46,16 @@ class LoggerManager
 
         $handlers       = [];
         $handlerNames   = $loggerConfig['handlers'];
-        foreach($handlerNames as $handlerName) {
+        foreach ($handlerNames as $handlerName) {
             $handler    = $this->handlerManager->get($handlerName);
             $handlers[] = $handler;
         }
 
         $processors = [];
-        if(isset($loggerConfig['processors'])) {
+        if (isset($loggerConfig['processors'])) {
             $processorNames = $loggerConfig['processors'];
 
-            foreach($processorNames as $processorName) {
+            foreach ($processorNames as $processorName) {
                 $processorFQCN  = '\\Monolog\\Processor\\'.$processorName;
                 $processor      = new $processorFQCN();
                 $processors[]   = $processor;

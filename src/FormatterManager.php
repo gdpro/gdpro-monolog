@@ -32,7 +32,7 @@ class FormatterManager
      */
     public function get($name = 'default')
     {
-        if(isset($this->registeredFormatters[$name])) {
+        if (isset($this->registeredFormatters[$name])) {
             return $this->registeredFormatters[$name];
         }
 

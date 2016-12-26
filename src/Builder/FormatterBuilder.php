@@ -17,11 +17,11 @@ class FormatterBuilder
     {
         $FQCN = '\\Monolog\\Formatter\\'.$class;
 
-        if($class == 'LogstashFormatter') {
+        if ($class == 'LogstashFormatter') {
             return new $FQCN($args['application']);
         }
 
-        if($class == 'LineFormatter') {
+        if ($class == 'LineFormatter') {
             return new $FQCN();
         }
     }

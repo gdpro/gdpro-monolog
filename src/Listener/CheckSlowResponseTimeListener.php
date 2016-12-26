@@ -65,12 +65,12 @@ class CheckSlowResponseTimeListener implements ListenerAggregateInterface
         $endTime        = microtime(true);
         $elapsedTime    = ($endTime - $this->startTime) * 1000;
 
-        if($elapsedTime > $this->threshold) {
+        if ($elapsedTime > $this->threshold) {
             $message = sprintf("%.0fms", $elapsedTime);
 
             try {
                 $this->logger->info($message);
-            } catch(\Exception $e) {
+            } catch (\Exception $e) {
                 $message = 'An Exception happenned while logging message for CheckSlowRespondTimeListener on action onFinish';
                 throw new LoggingException($message, 500, $e);
             }
