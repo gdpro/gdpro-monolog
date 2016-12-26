@@ -6,6 +6,7 @@ use GdproMonolog\Config\HandlerConfig;
 
 /**
  * Class HandlerManager
+ *
  * @package GdproMonolog
  */
 class HandlerManager
@@ -16,14 +17,14 @@ class HandlerManager
     protected $registeredHandlers = [];
 
     /**
-     * @var HandlerConfig
+     * @var array
      */
-    protected $handlerConfig;
+    protected $config;
 
     /**
      * @var HandlerBuilder
      */
-    protected $handlerBuilder;
+    protected $builder;
 
     /**
      * @var FormatterManager
@@ -31,40 +32,49 @@ class HandlerManager
     protected $formatterManager;
 
     /**
-     * HandlerManager constructor.
-     * @param HandlerConfig $handlerConfig
-     * @param HandlerBuilder $handlerBuilder
-     * @param FormatterManager $formatterManager
-     */
-    public function __construct(
-        HandlerConfig $handlerConfig,
-        HandlerBuilder $handlerBuilder,
-        FormatterManager $formatterManager
-    ) {
-        $this->handlerConfig    = $handlerConfig;
-        $this->handlerBuilder   = $handlerBuilder;
-        $this->formatterManager = $formatterManager;
-    }
-
-    /**
      * @param string $name
      * @return mixed
      */
     public function get($name = 'default')
     {
-        if(isset($this->registeredHandlers[$name])) {
+        if (isset($this->registeredHandlers[$name])) {
             return $this->registeredHandlers[$name];
         }
 
-        $handlerConfig  = $this->handlerConfig->get($name);
-        $handlerClass   = $handlerConfig['class'];
-        $handlerArgs    = $handlerConfig['args'];
-        $handler        = $this->handlerBuilder->build($handlerClass, $handlerArgs);
-        $formatterName  = $handlerConfig['formatter'];
-        $formatter      = $this->formatterManager->get($formatterName);
+        $handlerConfig = $this->config[$name];
+        $handlerClass = $handlerConfig['class'];
+        $handlerArgs = $handlerConfig['args'];
+        $handler = $this->builder->build($handlerClass, $handlerArgs);
+        $formatterName = $handlerConfig['formatter'];
+        $formatter = $this->formatterManager->get($formatterName);
 
         $handler->setFormatter($formatter);
 
         return $this->registeredHandlers[$name] = $handler;
     }
+
+    /**
+     * @param array $config
+     */
+    public function setConfig($config)
+    {
+        $this->config = $config;
+    }
+
+    /**
+     * @param HandlerBuilder $builder
+     */
+    public function setBuilder($builder)
+    {
+        $this->builder = $builder;
+    }
+
+    /**
+     * @param FormatterManager $formatterManager
+     */
+    public function setFormatterManager($formatterManager)
+    {
+        $this->formatterManager = $formatterManager;
+    }
 }
+

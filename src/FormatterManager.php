@@ -6,6 +6,7 @@ use GdproMonolog\Config\FormatterConfig;
 
 /**
  * Class FormatterManager
+ *
  * @package GdproMonolog
  */
 class FormatterManager
@@ -16,27 +17,14 @@ class FormatterManager
     protected $registeredFormatters = [];
 
     /**
-     * @var FormatterConfig
+     * @var array
      */
-    protected $formatterConfig;
+    protected $config;
 
     /**
      * @var FormatterBuilder
      */
-    protected $formatterBuilder;
-
-    /**
-     * FormatterManager constructor.
-     * @param FormatterConfig $formatterConfig
-     * @param FormatterBuilder $formatterBuilder
-     */
-    public function __construct(
-        FormatterConfig $formatterConfig,
-        FormatterBuilder $formatterBuilder
-    ) {
-        $this->formatterConfig  = $formatterConfig;
-        $this->formatterBuilder = $formatterBuilder;
-    }
+    protected $builder;
 
     /**
      * @param string $name
@@ -48,11 +36,27 @@ class FormatterManager
             return $this->registeredFormatters[$name];
         }
 
-        $formatterConfig    = $this->formatterConfig->get($name);
+        $formatterConfig    = $this->config[$name];
         $class              = $formatterConfig['class'];
         $args               = $formatterConfig['args'];
-        $formatter          = $this->formatterBuilder->build($class, $args);
+        $formatter          = $this->builder->build($class, $args);
 
         return $this->registeredFormatters[$name] = $formatter;
+    }
+
+    /**
+     * @param array $config
+     */
+    public function setConfig($config)
+    {
+        $this->config = $config;
+    }
+
+    /**
+     * @param FormatterBuilder $builder
+     */
+    public function setBuilder($builder)
+    {
+        $this->builder = $builder;
     }
 }

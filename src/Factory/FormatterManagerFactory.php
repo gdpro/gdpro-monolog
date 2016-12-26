@@ -1,15 +1,22 @@
 <?php
 namespace GdproMonolog\Factory;
 
+use GdproMonolog\Builder\FormatterBuilder;
+use GdproMonolog\FormatterManager;
 use Interop\Container\ContainerInterface;
 
 class FormatterManagerFactory
 {
     public function __invoke(ContainerInterface $services)
     {
-        return new \GdproMonolog\FormatterManager(
-            $services->get('gdpro_monolog.config.formatter'),
-            $services->get('gdpro_monolog.builder.formatter')
-        );
+        $globalConfig = $services->get('config');
+        $config = $globalConfig['gdpro_monolog']['formatter'];
+        $builder = $services->get(FormatterBuilder::class);
+
+        $instance = new FormatterManager();
+        $instance->setConfig($config);
+        $instance->setBuilder($builder);
+
+        return $instance;
     }
 }

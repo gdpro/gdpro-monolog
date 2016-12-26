@@ -8,6 +8,7 @@ use Zend\Mvc\MvcEvent;
 
 /**
  * Class LogDispatchErrorListener
+ *
  * @package GdproMonolog\Listener
  */
 class LogDispatchErrorListener implements ListenerAggregateInterface
@@ -22,14 +23,6 @@ class LogDispatchErrorListener implements ListenerAggregateInterface
      */
     protected $listeners = [];
 
-    /**
-     *
-     * @param Logger $logger
-     */
-    public function __construct(Logger $logger)
-    {
-        $this->logger = $logger;
-    }
     /**
      * {@inheritDoc}
      */
@@ -62,5 +55,13 @@ class LogDispatchErrorListener implements ListenerAggregateInterface
         }
 
         $this->logger->error($exception->getTraceAsString());
+    }
+
+    /**
+     * @param Logger $logger
+     */
+    public function setLogger($logger)
+    {
+        $this->logger = $logger;
     }
 }

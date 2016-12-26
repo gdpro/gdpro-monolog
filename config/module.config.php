@@ -1,28 +1,31 @@
 <?php
 namespace GdproMonolog;
 
+use GdproMonolog\Builder\FormatterBuilder;
+use GdproMonolog\Builder\HandlerBuilder;
+use GdproMonolog\Factory\FormatterManagerFactory;
+use GdproMonolog\Factory\HandlerManagerFactory;
+use GdproMonolog\Factory\LoggerManagerFactory;
+use GdproMonolog\Listener\CheckSlowResponseTimeListener;
+use GdproMonolog\Listener\Factory\CheckSlowResponseTimeListenerFactory;
+use GdproMonolog\Listener\Factory\LogDispatchErrorListenerFactory;
+use GdproMonolog\Listener\Factory\LogRenderErrorListenerFactory;
+use GdproMonolog\Listener\LogDispatchErrorListener;
+use GdproMonolog\Listener\LogRenderErrorListener;
+
 return [
     'service_manager' => [
         'invokables' => [
-            // Builders
-            'gdpro_monolog.builder.formatter'   => 'GdproMonolog\Builder\FormatterBuilder',
-            'gdpro_monolog.builder.handler'     => 'GdproMonolog\Builder\HandlerBuilder'
+            FormatterBuilder::class => FormatterBuilder::class,
+            HandlerBuilder::class => HandlerBuilder::class
         ],
         'factories' => [
-            // Manager
-            'gdpro_monolog.manager'             => 'GdproMonolog\Factory\LoggerManagerFactory',
-            'gdpro_monolog.manager.handler'     => 'GdproMonolog\Factory\HandlerManagerFactory',
-            'gdpro_monolog.manager.formatter'   => 'GdproMonolog\Factory\FormatterManagerFactory',
-
-            // Config
-            'gdpro_monolog.config.logger'       => 'GdproMonolog\Factory\Config\LoggerConfigFactory',
-            'gdpro_monolog.config.handler'      => 'GdproMonolog\Factory\Config\HandlerConfigFactory',
-            'gdpro_monolog.config.formatter'    => 'GdproMonolog\Factory\Config\FormatterConfigFactory',
-
-            // Listeners
-            'gdpro_monolog.listener.check_slow_response_time' => 'GdproMonolog\Factory\Listener\CheckSlowResponseTimeListenerFactory',
-            'gdpro_monolog.listener.log_render_error' => 'GdproMonolog\Factory\Listener\LogRenderErrorListenerFactory',
-            'gdpro_monolog.listener.log_dispatch_error' => 'GdproMonolog\Factory\Listener\LogDispatchErrorListenerFactory',
+            LoggerManager::class => LoggerManagerFactory::class,
+            HandlerManager::class => HandlerManagerFactory::class,
+            FormatterManager::class => FormatterManagerFactory::class,
+            CheckSlowResponseTimeListener::class => CheckSlowResponseTimeListenerFactory::class,
+            LogRenderErrorListener::class => LogRenderErrorListenerFactory::class,
+            LogDispatchErrorListener::class => LogDispatchErrorListenerFactory::class
         ]
     ],
     'gdpro_monolog' => [

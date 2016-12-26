@@ -6,6 +6,7 @@ use Zend\Mvc\MvcEvent;
 
 /**
  * Class Module
+ *
  * @package GdproMonolog
  */
 class Module
@@ -19,6 +20,7 @@ class Module
         $services = $e->getApplication()->getServiceManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+
 
         $eventManager->attachAggregate($services->get('gdpro_monolog.listener.check_slow_response_time'));
         $eventManager->attachAggregate($services->get('gdpro_monolog.listener.log_render_error'));

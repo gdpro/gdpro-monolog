@@ -9,6 +9,7 @@ use Zend\Mvc\MvcEvent;
 
 /**
  * Class CheckSlowResponseTimeListener
+ *
  * @package GdproMonolog\Listener
  */
 class CheckSlowResponseTimeListener implements ListenerAggregateInterface
@@ -20,6 +21,7 @@ class CheckSlowResponseTimeListener implements ListenerAggregateInterface
 
     /**
      * Set the limit of time acceptable for the request
+     *
      * @var $limit
      */
     protected $threshold;
@@ -35,22 +37,11 @@ class CheckSlowResponseTimeListener implements ListenerAggregateInterface
     protected $listeners = [];
 
     /**
-     * Constructor
-     * @param $threshold
-     * @param Logger $logger
-     */
-    public function __construct($threshold, Logger $logger)
-    {
-        $this->threshold = $threshold;
-        $this->logger = $logger;
-        $this->startTime = microtime(true);
-    }
-
-    /**
      * {@inheritDoc}
      */
     public function attach(EventManagerInterface $events)
     {
+        $this->startTime = microtime(true);
         $this->listeners[] = $events->attach(MvcEvent::EVENT_FINISH, [$this, 'onFinish']);
     }
 
@@ -84,5 +75,21 @@ class CheckSlowResponseTimeListener implements ListenerAggregateInterface
                 throw new LoggingException($message, 500, $e);
             }
         }
+    }
+
+    /**
+     * @param mixed $threshold
+     */
+    public function setThreshold($threshold)
+    {
+        $this->threshold = $threshold;
+    }
+
+    /**
+     * @param Logger $logger
+     */
+    public function setLogger($logger)
+    {
+        $this->logger = $logger;
     }
 }

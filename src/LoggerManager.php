@@ -7,6 +7,7 @@ use Monolog\Logger;
 
 /**
  * Class LoggerManager
+ *
  * @package GdproMonolog
  */
 class LoggerManager
@@ -17,9 +18,9 @@ class LoggerManager
     protected $registeredLoggers = [];
 
     /**
-     * @var LoggerConfig
+     * @var array
      */
-    protected $loggerConfig;
+    protected $config;
 
     /**
      * @var HandlerManager
@@ -32,22 +33,6 @@ class LoggerManager
     protected $formatterManager;
 
     /**
-     * LoggerManager constructor.
-     * @param LoggerConfig $loggerConfig
-     * @param HandlerManager $handlerManager
-     * @param FormatterManager $formatterManager
-     */
-    public function __construct(
-        LoggerConfig $loggerConfig,
-        HandlerManager $handlerManager,
-        FormatterManager $formatterManager
-    ) {
-        $this->loggerConfig     = $loggerConfig;
-        $this->handlerManager   = $handlerManager;
-        $this->formatterManager = $formatterManager;
-    }
-
-    /**
      * @param string $name
      * @return Logger
      */
@@ -57,7 +42,7 @@ class LoggerManager
             return $this->registeredLoggers[$name];
         }
 
-        $loggerConfig = $this->loggerConfig->get($name);
+        $loggerConfig = $this->config[$name];
 
         $handlers       = [];
         $handlerNames   = $loggerConfig['handlers'];
@@ -80,5 +65,29 @@ class LoggerManager
         $logger = new Logger($loggerConfig['name'], $handlers, $processors);
 
         return $this->registeredLoggers[$name] = $logger;
+    }
+
+    /**
+     * @param array $config
+     */
+    public function setConfig($config)
+    {
+        $this->config = $config;
+    }
+
+    /**
+     * @param HandlerManager $handlerManager
+     */
+    public function setHandlerManager($handlerManager)
+    {
+        $this->handlerManager = $handlerManager;
+    }
+
+    /**
+     * @param FormatterManager $formatterManager
+     */
+    public function setFormatterManager($formatterManager)
+    {
+        $this->formatterManager = $formatterManager;
     }
 }

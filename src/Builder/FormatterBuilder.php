@@ -3,6 +3,7 @@ namespace GdproMonolog\Builder;
 
 /**
  * Class FormatterBuilder
+ *
  * @package GdproMonolog\Builder
  */
 class FormatterBuilder

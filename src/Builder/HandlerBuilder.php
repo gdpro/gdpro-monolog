@@ -3,6 +3,7 @@ namespace GdproMonolog\Builder;
 
 /**
  * Class HandlerBuilder
+ *
  * @package GdproMonolog\Builder
  */
 class HandlerBuilder

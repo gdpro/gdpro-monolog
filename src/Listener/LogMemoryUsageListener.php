@@ -8,6 +8,7 @@ use Zend\Mvc\MvcEvent;
 
 /**
  * Class LogMemoryUsageListener
+ *
  * @package GdproMonolog\Listener
  */
 class LogMemoryUsageListener implements ListenerAggregateInterface
@@ -19,6 +20,7 @@ class LogMemoryUsageListener implements ListenerAggregateInterface
 
     /**
      * Set the limit of time acceptable for the request
+     *
      * @var $limit
      */
     protected $threshold;
@@ -35,8 +37,9 @@ class LogMemoryUsageListener implements ListenerAggregateInterface
 
     /**
      * Constructor
+     *
      * @param $threshold
-     * @param Logger $logger
+     * @param Logger    $logger
      */
     public function __construct($threshold, Logger $logger)
     {

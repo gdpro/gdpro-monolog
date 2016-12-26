@@ -8,6 +8,7 @@ use Zend\Mvc\MvcEvent;
 
 /**
  * Class LogRenderErrorListener
+ *
  * @package GdproMonolog\Listener
  */
 class LogRenderErrorListener implements ListenerAggregateInterface
@@ -21,15 +22,6 @@ class LogRenderErrorListener implements ListenerAggregateInterface
      * @var \Zend\Stdlib\CallbackHandler[]
      */
     protected $listeners = [];
-
-    /**
-     * Constructor
-     * @param Logger $logger
-     */
-    public function __construct(Logger $logger)
-    {
-        $this->logger = $logger;
-    }
 
     /**
      * {@inheritDoc}
@@ -63,5 +55,13 @@ class LogRenderErrorListener implements ListenerAggregateInterface
         $message            = $resultVariables['exception']->getMessage();
 
         $this->logger->error($message);
+    }
+
+    /**
+     * @param Logger $logger
+     */
+    public function setLogger($logger)
+    {
+        $this->logger = $logger;
     }
 }

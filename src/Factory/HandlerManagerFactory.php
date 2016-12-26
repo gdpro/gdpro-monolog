@@ -1,16 +1,26 @@
 <?php
 namespace GdproMonolog\Factory;
 
+use GdproMonolog\Builder\HandlerBuilder;
+use GdproMonolog\FormatterManager;
+use GdproMonolog\HandlerManager;
 use Interop\Container\ContainerInterface;
 
 class HandlerManagerFactory
 {
     public function __invoke(ContainerInterface $services)
     {
-        return new \GdproMonolog\HandlerManager(
-            $services->get('gdpro_monolog.config.handler'),
-            $services->get('gdpro_monolog.builder.handler'),
-            $services->get('gdpro_monolog.manager.formatter')
-        );
+        $globalConfig = $services->get('config');
+        $config = $globalConfig['gdpro_monolog']['hangler'];
+
+        $builder = $services->get(HandlerBuilder::class);
+        $formatterManager = $services->get(FormatterManager::class);
+
+        $instance = new HandlerManager();
+        $instance->setConfig($config);
+        $instance->setBuilder($builder);
+        $instance->setFormatterManager($formatterManager);
+
+        return $instance;
     }
 }
