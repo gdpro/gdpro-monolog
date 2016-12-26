@@ -26,10 +26,7 @@
     "autoload": {
         "psr-4": {
             "GdproMonolog\\": "src/"
-        },
-        "classmap": [
-            "Module.php"
-        ]
+        }
     },
     "autoload-dev": {
         "psr-4": {
