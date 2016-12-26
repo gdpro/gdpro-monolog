@@ -11,7 +11,7 @@ class HandlerManagerFactory
     public function __invoke(ContainerInterface $services)
     {
         $globalConfig = $services->get('config');
-        $config = $globalConfig['gdpro_monolog']['hangler'];
+        $config = $globalConfig['gdpro_monolog']['handlers'];
 
         $builder = $services->get(HandlerBuilder::class);
         $formatterManager = $services->get(FormatterManager::class);

@@ -11,7 +11,7 @@ class LoggerManagerFactory
     public function __invoke(ContainerInterface $services)
     {
         $globalConfig = $services->get('config');
-        $config = $globalConfig['gdpro_monolog']['logger'];
+        $config = $globalConfig['gdpro_monolog']['loggers'];
         $handlerManager = $services->get(HandlerManager::class);
         $formatterManager = $services->get(FormatterManager::class);
 

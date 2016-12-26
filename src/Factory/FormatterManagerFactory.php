@@ -10,7 +10,7 @@ class FormatterManagerFactory
     public function __invoke(ContainerInterface $services)
     {
         $globalConfig = $services->get('config');
-        $config = $globalConfig['gdpro_monolog']['formatter'];
+        $config = $globalConfig['gdpro_monolog']['formatters'];
         $builder = $services->get(FormatterBuilder::class);
 
         $instance = new FormatterManager();
