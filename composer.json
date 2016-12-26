@@ -12,16 +12,18 @@
         }
     ],
     "require": {
-        "php": ">=5.5.8"
+        "php": ">=5.5.8",
+        "psr/log": "^1.0",
+        "monolog/monolog": "^1.22"
     },
     "require-dev": {
+        "zendframework/zend-stdlib": "^3.1",
+        "zendframework/zend-modulemanager": "^2.7",
+        "zendframework/zend-servicemanager": "^3.2",
+        "zendframework/zend-eventmanager": "^3.1",
+        "zendframework/zend-mvc": "^3.0",
         "phpunit/phpunit": "~4.3",
-        "monolog/monolog": "^1.22",
-        "zend/zend-stdlib": "^3.1",
-        "zend/zend-modulemanager": "^2.7",
-        "zend/zend-servicemanager": "^3.2",
-        "zend/zend-eventmanager": "^3.1",
-        "zend/zend-mvc": "^3.0"
+        "squizlabs/php_codesniffer": "^2.2"
     },
     "autoload": {
         "psr-4": {
@@ -32,5 +34,9 @@
         "psr-4": {
             "GdproMonologTest\\": "test/"
         }
+    },
+    "scripts": {
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf"
     }
 }
