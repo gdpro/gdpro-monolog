@@ -1,8 +1,6 @@
 <?php
 namespace GdproMonolog;
 
-use Monolog\Logger;
-
 return [
     'service_manager' => [
         'invokables' => [
@@ -95,7 +93,7 @@ return [
                 'args' => [
                     'stream' =>  'data/log/default.log',
                     // The minimum logging level at which this handler will be triggered
-                    'level' => Logger::DEBUG,
+                    'level' => 100,
                     // Whether the messages that are handled can bubble up the stack or not
                     'bubble' => true,
                     // Optional, file permissions (default (0644) are only for owner read/write)
