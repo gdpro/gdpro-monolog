@@ -1,6 +1,10 @@
 <?php
 namespace GdproMonolog;
 
+use GdproMonolog\Listener\CheckSlowResponseTimeListener;
+use GdproMonolog\Listener\LogDispatchErrorListener;
+use GdproMonolog\Listener\LogMemoryUsageListener;
+use GdproMonolog\Listener\LogRenderErrorListener;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
@@ -21,10 +25,25 @@ class Module
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
 
+        $eventManager->attach(MvcEvent::EVENT_FINISH, [
+            $services->get(CheckSlowResponseTimeListener::class),
+            'onFinish'
+        ]);
 
-        $eventManager->attachAggregate($services->get('gdpro_monolog.listener.check_slow_response_time'));
-        $eventManager->attachAggregate($services->get('gdpro_monolog.listener.log_render_error'));
-        $eventManager->attachAggregate($services->get('gdpro_monolog.listener.log_dispatch_error'));
+        $eventManager->attach(MvcEvent::EVENT_RENDER_ERROR, [
+            $services->get(LogRenderErrorListener::class),
+            'onRenderError'
+        ]);
+
+        $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, [
+            $services->get(LogDispatchErrorListener::class),
+            'onDispatchError'
+        ]);
+
+        $eventManager->attach(MvcEvent::EVENT_FINISH, [
+            $services->get(LogMemoryUsageListener::class),
+            'onFinish'
+        ]);
     }
 
     /**

@@ -33,7 +33,7 @@ class HandlerManager
 
     /**
      * @param string $name
-     * @return mixed
+     * @return array
      */
     public function get($name = 'default')
     {
