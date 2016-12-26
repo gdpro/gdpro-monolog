@@ -1,20 +1,11 @@
 <?php
 namespace GdproMonolog\Factory\Config;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
 
-/**
- * Class FormatterConfigFactory
- * @package GdproMonolog\Factory\Config
- */
-class FormatterConfigFactory implements FactoryInterface
+class FormatterConfigFactory
 {
-    /**
-     * @param ServiceLocatorInterface $services
-     * @return \GdproMonolog\Config\FormatterConfig
-     */
-    public function createService(ServiceLocatorInterface $services)
+    public function __invoke(ContainerInterface $services)
     {
         $config = $services->get('config');
 

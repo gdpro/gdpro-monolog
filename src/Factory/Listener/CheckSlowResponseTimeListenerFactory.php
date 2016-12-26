@@ -1,20 +1,11 @@
 <?php
 namespace GdproMonolog\Factory\Listener;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
 
-/**
- * Class CheckSlowResponseTimeListenerFactory
- * @package GdproMonolog\Factory\Listener
- */
-class CheckSlowResponseTimeListenerFactory implements FactoryInterface
+class CheckSlowResponseTimeListenerFactory
 {
-    /**
-     * @param ServiceLocatorInterface $services
-     * @return \GdproMonolog\Listener\CheckSlowResponseTimeListener
-     */
-    public function createService(ServiceLocatorInterface $services)
+    public function __invoke(ContainerInterface $services)
     {
         $config     = $services->get('config');
         $loggerName = $config['gdpro_monolog']['listeners']['check_slow_response_time']['logger'];

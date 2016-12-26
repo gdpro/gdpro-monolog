@@ -1,20 +1,11 @@
 <?php
 namespace GdproMonolog\Factory;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
 
-/**
- * Class LoggerManagerFactory
- * @package GdproMonolog\Factory
- */
-class LoggerManagerFactory implements FactoryInterface
+class LoggerManagerFactory
 {
-    /**
-     * @param ServiceLocatorInterface $services
-     * @return \GdproMonolog\LoggerManager
-     */
-    public function createService(ServiceLocatorInterface $services)
+    public function __invoke(ContainerInterface $services)
     {
         return new \GdproMonolog\LoggerManager(
             $services->get('gdpro_monolog.config.logger'),

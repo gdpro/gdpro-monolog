@@ -1,20 +1,11 @@
 <?php
 namespace GdproMonolog\Factory\Listener;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
 
-/**
- * Class LogDispatchErrorListenerFactory
- * @package GdproMonolog\Factory\Listener
- */
-class LogDispatchErrorListenerFactory implements FactoryInterface
+class LogDispatchErrorListenerFactory
 {
-    /**
-     * @param ServiceLocatorInterface $services
-     * @return \GdproMonolog\Listener\LogDispatchErrorListener
-     */
-    public function createService(ServiceLocatorInterface $services)
+    public function __invoke(ContainerInterface $services)
     {
         $config     = $services->get('config');
         $loggerName = $config['gdpro_monolog']['listeners']['log_dispatch_error']['logger'];
