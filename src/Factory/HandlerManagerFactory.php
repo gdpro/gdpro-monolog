@@ -18,12 +18,10 @@ class HandlerManagerFactory
         /** @var FormatterManager $formatterManager */
 
         $config = $this->getConfig($services);
-        $builder = $services->get(HandlerBuilder::class);
         $formatterManager = $services->get(FormatterManager::class);
 
         $instance = new HandlerManager();
         $instance->setConfig($config);
-        $instance->setBuilder($builder);
         $instance->setFormatterManager($formatterManager);
 
         return $instance;

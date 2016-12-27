@@ -20,11 +20,9 @@ class FormatterManagerFactory
         /** @var FormatterBuilder $builder */
 
         $config = $this->getConfig($services);
-        $builder = $services->get(FormatterBuilder::class);
 
         $instance = new FormatterManager();
         $instance->setConfig($config);
-        $instance->setBuilder($builder);
 
         return $instance;
     }

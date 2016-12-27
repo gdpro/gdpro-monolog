@@ -23,11 +23,6 @@ class FormatterManager
     protected $config;
 
     /**
-     * @var FormatterBuilder
-     */
-    protected $builder;
-
-    /**
      * @param string $name
      * @return FormatterInterface
      */
@@ -39,9 +34,10 @@ class FormatterManager
 
         $defaultConfig = $this->config['default'];
         $formatterConfig = array_merge_recursive($defaultConfig, $this->config[$name]);
-        $class = $formatterConfig['class'];
-        $args = $formatterConfig['args'];
-        $formatter = $this->builder->build($class, $args);
+
+        $formatterClass = $formatterConfig['class'];
+        $formatterArgs = $formatterConfig['args'];
+        $formatter = call_user_func_array('\\Monolog\\Formatter\\'.$formatterClass, $formatterArgs);
 
         return $this->registeredFormatters[$name] = $formatter;
     }
@@ -52,13 +48,5 @@ class FormatterManager
     public function setConfig($config)
     {
         $this->config = $config;
-    }
-
-    /**
-     * @param FormatterBuilder $builder
-     */
-    public function setBuilder($builder)
-    {
-        $this->builder = $builder;
     }
 }

@@ -23,11 +23,6 @@ class HandlerManager
     protected $config;
 
     /**
-     * @var HandlerBuilder
-     */
-    protected $builder;
-
-    /**
      * @var FormatterManager
      */
     protected $formatterManager;
@@ -44,9 +39,11 @@ class HandlerManager
 
         $defaultConfig = $this->config['default'];
         $handlerConfig = array_merge_recursive($defaultConfig, $this->config[$name]);
+
         $handlerClass = $handlerConfig['class'];
         $handlerArgs = $handlerConfig['args'];
-        $handler = $this->builder->build($handlerClass, $handlerArgs);
+        $handler = call_user_func_array('\\Monolog\\Handler\\'.$handlerClass, $handlerArgs);
+
         $formatterName = $handlerConfig['formatter'];
         $formatter = $this->formatterManager->get($formatterName);
 

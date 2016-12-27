@@ -15,10 +15,6 @@ use GdproMonolog\Listener\LogRenderErrorListener;
 
 return [
     'service_manager' => [
-        'invokables' => [
-            FormatterBuilder::class => FormatterBuilder::class,
-            HandlerBuilder::class => HandlerBuilder::class
-        ],
         'factories' => [
             LoggerManager::class => LoggerManagerFactory::class,
             HandlerManager::class => HandlerManagerFactory::class,
