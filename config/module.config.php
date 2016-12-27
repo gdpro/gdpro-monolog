@@ -1,8 +1,6 @@
 <?php
 namespace GdproMonolog;
 
-use GdproMonolog\Builder\FormatterBuilder;
-use GdproMonolog\Builder\HandlerBuilder;
 use GdproMonolog\Factory\FormatterManagerFactory;
 use GdproMonolog\Factory\HandlerManagerFactory;
 use GdproMonolog\Factory\LoggerManagerFactory;
@@ -47,6 +45,10 @@ return [
                 'name' => 'Default Logger',
                 'handlers' => [
                     'default'
+                ],
+                'processors' => [
+                    'WebProcessor',
+                    'PsrLogMessageProcessor'
                 ]
             ],
             'slow_response_time' => [
@@ -55,7 +57,8 @@ return [
                     'slow_response_time'
                 ],
                 'processors' => [
-                    'WebProcessor'
+                    'WebProcessor',
+                    'PsrLogMessageProcessor'
                 ]
             ],
             'render_error' => [
@@ -64,16 +67,18 @@ return [
                     'render_error'
                 ],
                 'processors' => [
-                    'WebProcessor'
+                    'WebProcessor',
+                    'PsrLogMessageProcessor'
                 ]
             ],
             'dispatch_error' => [
                 'name' => 'Dispatch',
                 'handlers' => [
-                    'dispatch_error',
+                    'dispatch_error'
                 ],
                 'processors' => [
-                    'WebProcessor'
+                    'WebProcessor',
+                    'PsrLogMessageProcessor'
                 ]
             ]
         ],
@@ -82,48 +87,28 @@ return [
                 'class' => 'StreamHandler',
                 // This args match to the constructor arg of the class
                 'args' => [
-                    'stream' =>  'data/log/default.log',
-                    // The minimum logging level at which this handler will be triggered
-                    'level' => 100,
-                    // Whether the messages that are handled can bubble up the stack or not
-                    'bubble' => true,
-                    // Optional, file permissions (default (0644) are only for owner read/write)
-                    'file_permission' => 0777,
-                    // Try to lock log file before doing any writes
-                    'user_locking' => false
+                    'stream' => 'data/log/default.log',
                 ],
                 'formatter' => 'default'
             ],
             'render_error' => [
                 'class' => 'StreamHandler',
                 'args' => [
-                    'stream' =>  'data/log/render_error.log',
-                    'level' => 100,
-                    'bubble' => true,
-                    'file_permission' => 0777,
-                    'user_locking' => false
+                    'stream' => 'data/log/render_error.log',
                 ],
                 'formatter' => 'default'
             ],
             'dispatch_error' => [
                 'class' => 'StreamHandler',
                 'args' => [
-                    'stream' =>  'data/log/dispatch_error.log',
-                    'level' => 100,
-                    'bubble' => true,
-                    'file_permission' => 0777,
-                    'user_locking' => false
+                    'stream' => 'data/log/dispatch_error.log',
                 ],
                 'formatter' => 'default'
             ],
             'slow_response_time' => [
                 'class' => 'StreamHandler',
                 'args' => [
-                    'stream' =>  'data/log/slow_response_time.log',
-                    'level' => 100,
-                    'bubble' => true,
-                    'file_permission' => 0777,
-                    'user_locking' => false
+                    'stream' => 'data/log/slow_response_time.log',
                 ],
                 'formatter' => 'default'
             ]
@@ -132,9 +117,9 @@ return [
             'default' => [
                 'class' => 'LineFormatter',
                 'args' => [
-                    'application' => 'gdpro'
+                    'format' => "%datetime% - %channel% - %message% \n%extra% \n"
                 ]
             ]
-        ],
+        ]
     ]
 ];
