@@ -50,7 +50,6 @@ return array(
 
 
 ### Documentation
-
 By Default the monolog logging will log your error event and add them to the log files
   - data/log/route.error.log
   - data/log/dispatch.error.log
@@ -58,19 +57,12 @@ By Default the monolog logging will log your error event and add them to the log
 
 
 ### Utilisation
-
 #### Default Logger
 <code php>
-    $this->getServiceLocator()->get('gdpro-monolog_default')->addDebug('hello world');
+    $this->getServiceLocator()->get('gdpro-monolog_default')->addDebug('hello {contextvar}', ['contextvar' => 'world']);
 </code>
-
 
 #### Exception Logger
 <code php>
-    $this->getServiceLocator()->get('my_awesome_customized_logger')->addDebug('hello world');
+    $this->getServiceLocator()->get('my_awesome_customized_logger')->addDebug('hello {contextvar}', ['contextvar' => 'world']);
 </code>
-
-
-### TODO
-- Add more handler
-
