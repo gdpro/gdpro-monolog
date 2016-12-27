@@ -47,7 +47,7 @@ class LoggerManagerFactory
         }
 
         if (isset($globalConfig['monolog']['loggers'])) {
-            $config = $globalConfig['monolog']['loggers'];
+            $config = array_merge_recursive($config, $globalConfig['monolog']['loggers']);
         }
 
         return $config;
