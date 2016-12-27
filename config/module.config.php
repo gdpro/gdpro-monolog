@@ -89,6 +89,7 @@ return [
             // Default define the default value for all you handlers. So please do not delete
             'default' => [
                 'class' => 'StreamHandler',
+                // This args match to the constructor arg of the class
                 'args' => [
                     'stream' =>  'data/log/default.log',
                     // The minimum logging level at which this handler will be triggered
