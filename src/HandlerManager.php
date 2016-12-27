@@ -42,7 +42,9 @@ class HandlerManager
 
         $handlerClass = $handlerConfig['class'];
         $handlerArgs = $handlerConfig['args'];
-        $handler = call_user_func_array('\\Monolog\\Handler\\'.$handlerClass, $handlerArgs);
+        $handlerFqcn = '\\Monolog\\Handler\\'.$handlerClass;
+        $reflection = new \ReflectionClass($handlerFqcn);
+        $handler = $reflection->newInstanceArgs($handlerArgs);
 
         $formatterName = $handlerConfig['formatter'];
         $formatter = $this->formatterManager->get($formatterName);

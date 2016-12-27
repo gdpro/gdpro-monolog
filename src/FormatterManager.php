@@ -37,7 +37,9 @@ class FormatterManager
 
         $formatterClass = $formatterConfig['class'];
         $formatterArgs = $formatterConfig['args'];
-        $formatter = call_user_func_array('\\Monolog\\Formatter\\'.$formatterClass, $formatterArgs);
+        $formatterFqcn = '\\Monolog\\Formatter\\'.$formatterClass;
+        $reflection = new \ReflectionClass($formatterFqcn);
+        $formatter = $reflection->newInstanceArgs($formatterArgs);
 
         return $this->registeredFormatters[$name] = $formatter;
     }
