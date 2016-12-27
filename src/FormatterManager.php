@@ -36,10 +36,11 @@ class FormatterManager
             return $this->registeredFormatters[$name];
         }
 
-        $formatterConfig    = $this->config[$name];
-        $class              = $formatterConfig['class'];
-        $args               = $formatterConfig['args'];
-        $formatter          = $this->builder->build($class, $args);
+        $defaultConfig = $this->config['default'];
+        $formatterConfig = array_merge_recursive($defaultConfig, $this->config[$name]);
+        $class = $formatterConfig['class'];
+        $args = $formatterConfig['args'];
+        $formatter = $this->builder->build($class, $args);
 
         return $this->registeredFormatters[$name] = $formatter;
     }
