@@ -38,7 +38,7 @@ class HandlerManager
         }
 
         $defaultConfig = $this->config['default'];
-        $handlerConfig = array_merge_recursive($defaultConfig, $this->config[$name]);
+        $handlerConfig = array_replace_recursive($defaultConfig, $this->config[$name]);
 
         $handlerClass = $handlerConfig['class'];
         $handlerArgs = $handlerConfig['args'];

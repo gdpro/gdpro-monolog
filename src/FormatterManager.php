@@ -33,7 +33,7 @@ class FormatterManager
         }
 
         $defaultConfig = $this->config['default'];
-        $formatterConfig = array_merge_recursive($defaultConfig, $this->config[$name]);
+        $formatterConfig = array_replace_recursive($defaultConfig, $this->config[$name]);
 
         $formatterClass = $formatterConfig['class'];
         $formatterArgs = $formatterConfig['args'];

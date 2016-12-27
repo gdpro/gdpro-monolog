@@ -44,7 +44,7 @@ class LoggerManager
         }
 
         $defaultConfig = $this->config['default'];
-        $loggerConfig = array_merge_recursive($defaultConfig, $this->config[$name]);
+        $loggerConfig = array_replace_recursive($defaultConfig, $this->config[$name]);
 
         $handlers       = [];
         $handlerNames   = $loggerConfig['handlers'];
