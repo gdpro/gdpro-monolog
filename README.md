@@ -28,7 +28,7 @@ the `require` section:
 
 ```javascript
 "require": {
-    "gdpro/gdpro-monolog": "~1.0"
+    "gdpro/gdpro-monolog": "^1.0"
 }
 ```
 
@@ -69,4 +69,8 @@ By Default the monolog logging will log your error event and add them to the log
 <code php>
     $this->getServiceLocator()->get('my_awesome_customized_logger')->addDebug('hello world');
 </code>
+
+
+### TODO
+- Add more handler
 
