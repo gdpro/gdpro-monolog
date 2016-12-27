@@ -66,3 +66,39 @@ By Default the monolog logging will log your error event and add them to the log
 <code php>
     $this->getServiceLocator()->get('my_awesome_customized_logger')->addDebug('hello {contextvar}', ['contextvar' => 'world']);
 </code>
+
+<code php>    
+/**
+* @param MvcEvent $event
+*/
+public function onBootstrap(MvcEvent $event)
+{
+  $eventManager = $event->getApplication()->getEventManager();
+  $moduleRouteListener = new ModuleRouteListener();
+  $moduleRouteListener->attach($eventManager);
+
+  $eventManager->attach(MvcEvent::EVENT_FINISH, [$this, 'onFinish']);
+  $eventManager->attach(MvcEvent::EVENT_RENDER_ERROR, [$this, 'onRenderError']);
+  $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, [$this, 'onDispatchError']);
+}
+
+public function onFinish(MvcEvent $event)
+{
+  $services = $event->getApplication()->getServiceManager();
+  $services->get(CheckSlowResponseTimeListener::class);
+  $services->get(LogMemoryUsageListener::class);
+}
+
+public function onRenderError(MvcEvent $event)
+{
+  $services = $event->getApplication()->getServiceManager();
+  $services->get(LogRenderErrorListener::class);
+}
+
+
+public function onDispatchError(MvcEvent $event)
+{
+  $services = $event->getApplication()->getServiceManager();
+  $services->get(LogDispatchErrorListener::class);
+}
+</code>
