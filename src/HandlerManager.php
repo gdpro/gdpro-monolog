@@ -3,6 +3,7 @@ namespace GdproMonolog;
 
 use GdproMonolog\Builder\HandlerBuilder;
 use GdproMonolog\Config\HandlerConfig;
+use Monolog\Handler\HandlerInterface;
 
 /**
  * Class HandlerManager
@@ -33,7 +34,7 @@ class HandlerManager
 
     /**
      * @param string $name
-     * @return array
+     * @return HandlerInterface
      */
     public function get($name = 'default')
     {

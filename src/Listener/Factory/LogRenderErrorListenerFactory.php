@@ -6,8 +6,16 @@ use GdproMonolog\LoggerManager;
 use Interop\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 
+/**
+ * Class LogRenderErrorListenerFactory
+ * @package GdproMonolog\Listener\Factory
+ */
 class LogRenderErrorListenerFactory
 {
+    /**
+     * @param ContainerInterface $services
+     * @return LogRenderErrorListener
+     */
     public function __invoke(ContainerInterface $services)
     {
         $loggerName = $this->getLoggerName($services);
@@ -20,6 +28,10 @@ class LogRenderErrorListenerFactory
         return $instance;
     }
 
+    /**
+     * @param ContainerInterface $services
+     * @return string|null
+     */
     protected function getLoggerName(ContainerInterface $services)
     {
         $globalConfig = $services->get('config');

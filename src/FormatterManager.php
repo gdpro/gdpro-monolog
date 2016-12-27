@@ -3,6 +3,7 @@ namespace GdproMonolog;
 
 use GdproMonolog\Builder\FormatterBuilder;
 use GdproMonolog\Config\FormatterConfig;
+use Monolog\Formatter\FormatterInterface;
 
 /**
  * Class FormatterManager
@@ -28,7 +29,7 @@ class FormatterManager
 
     /**
      * @param string $name
-     * @return mixed
+     * @return FormatterInterface
      */
     public function get($name = 'default')
     {

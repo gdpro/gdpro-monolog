@@ -6,10 +6,17 @@ use GdproMonolog\FormatterManager;
 use GdproMonolog\HandlerManager;
 use Interop\Container\ContainerInterface;
 
+/**
+ * Class HandlerManagerFactory
+ * @package GdproMonolog\Factory
+ */
 class HandlerManagerFactory
 {
     public function __invoke(ContainerInterface $services)
     {
+        /** @var HandlerBuilder $builder */
+        /** @var FormatterManager $formatterManager */
+
         $config = $this->getConfig($services);
         $builder = $services->get(HandlerBuilder::class);
         $formatterManager = $services->get(FormatterManager::class);
@@ -22,6 +29,10 @@ class HandlerManagerFactory
         return $instance;
     }
 
+    /**
+     * @param ContainerInterface $services
+     * @return array
+     */
     protected function getConfig(ContainerInterface $services)
     {
         $globalConfig = $services->get('config');

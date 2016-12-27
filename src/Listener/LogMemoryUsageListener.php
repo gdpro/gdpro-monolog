@@ -1,6 +1,7 @@
 <?php
 namespace GdproMonolog\Listener;
 
+use Psr\Log\LoggerInterface;
 use Zend\Mvc\MvcEvent;
 
 /**
@@ -22,7 +23,7 @@ class LogMemoryUsageListener
     protected $threshold;
 
     /**
-     * @var \Monolog\Logger
+     * @var LoggerInterface
      */
     protected $logger;
 

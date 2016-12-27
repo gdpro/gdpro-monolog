@@ -4,11 +4,23 @@ namespace GdproMonolog\Listener\Factory;
 use GdproMonolog\Listener\CheckSlowResponseTimeListener;
 use GdproMonolog\LoggerManager;
 use Interop\Container\ContainerInterface;
+use Psr\Log\LoggerInterface;
 
+/**
+ * Class CheckSlowResponseTimeListenerFactory
+ * @package GdproMonolog\Listener\Factory
+ */
 class CheckSlowResponseTimeListenerFactory
 {
+    /**
+     * @param ContainerInterface $services
+     * @return CheckSlowResponseTimeListener
+     */
     public function __invoke(ContainerInterface $services)
     {
+        /** @var LoggerManager $loggerManager */
+        /** @var LoggerInterface $logger */
+
         $loggerName = $this->getLoggerName($services);
         $threshold  = $this->getThresold($services);
         $loggerManager = $services->get(LoggerManager::class);
@@ -21,6 +33,10 @@ class CheckSlowResponseTimeListenerFactory
         return $instance;
     }
 
+    /**
+     * @param ContainerInterface $services
+     * @return string|null
+     */
     protected function getLoggerName(ContainerInterface $services)
     {
         $globalConfig = $services->get('config');

@@ -1,7 +1,7 @@
 <?php
 namespace GdproMonolog\Listener;
 
-use Monolog\Logger;
+use Psr\Log\LoggerInterface;
 use Zend\Mvc\MvcEvent;
 
 /**
@@ -11,7 +11,7 @@ use Zend\Mvc\MvcEvent;
 class LogDispatchErrorListener
 {
     /**
-     * @var \Monolog\Logger
+     * @var LoggerInterface
      */
     protected $logger;
 
@@ -30,7 +30,7 @@ class LogDispatchErrorListener
     }
 
     /**
-     * @param Logger $logger
+     * @param LoggerInterface $logger
      */
     public function setLogger($logger)
     {

@@ -4,6 +4,7 @@ namespace GdproMonolog;
 use GdproMonolog\Config\LoggerConfig;
 use GdproMonolog\Proxy\LoggerProxy;
 use Monolog\Logger;
+use Psr\Log\LoggerInterface;
 
 /**
  * Class LoggerManager
@@ -34,7 +35,7 @@ class LoggerManager
 
     /**
      * @param string $name
-     * @return Logger
+     * @return LoggerInterface
      */
     public function get($name = 'default')
     {

@@ -2,7 +2,7 @@
 namespace GdproMonolog\Listener;
 
 use GdproMonolog\Exception\LoggingException;
-use Monolog\Logger;
+use Psr\Log\LoggerInterface;
 use Zend\Mvc\MvcEvent;
 
 /**
@@ -12,19 +12,19 @@ use Zend\Mvc\MvcEvent;
 class CheckSlowResponseTimeListener
 {
     /**
-     * @var $startTime
+     * @var int $startTime
      */
     protected $startTime;
 
     /**
      * Set the limit of time acceptable for the request
      *
-     * @var $limit
+     * @var int $limit
      */
     protected $threshold;
 
     /**
-     * @var \Monolog\Logger
+     * @var LoggerInterface
      */
     protected $logger;
 
@@ -49,7 +49,7 @@ class CheckSlowResponseTimeListener
     }
 
     /**
-     * @param mixed $threshold
+     * @param int $threshold
      */
     public function setThreshold($threshold)
     {
@@ -57,7 +57,7 @@ class CheckSlowResponseTimeListener
     }
 
     /**
-     * @param Logger $logger
+     * @param LoggerInterface $logger
      */
     public function setLogger($logger)
     {
