@@ -14,7 +14,6 @@ class HandlerManagerFactory
 {
     public function __invoke(ContainerInterface $services)
     {
-        /** @var HandlerBuilder $builder */
         /** @var FormatterManager $formatterManager */
 
         $config = $this->getConfig($services);

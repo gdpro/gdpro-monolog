@@ -17,8 +17,6 @@ class FormatterManagerFactory
      */
     public function __invoke(ContainerInterface $services)
     {
-        /** @var FormatterBuilder $builder */
-
         $config = $this->getConfig($services);
 
         $instance = new FormatterManager();
