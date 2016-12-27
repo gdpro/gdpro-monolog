@@ -31,22 +31,22 @@ return [
     'gdpro_monolog' => [
         'listeners' => [
             'check_slow_response_time' => [
-                'enabled'   => true,
-                'logger'    => 'slow_response_time',
+                'enabled' => true,
+                'logger' => 'slow_response_time',
                 // Response time limit in micro seconds, this time only take in
                 // Account the application time, not the latency of the network.
                 'threshold' => '400'
             ],
             'log_dispatch_error' => [
-                'enabled'   => true,
-                'logger'    => 'dispatch_error'
+                'enabled' => true,
+                'logger' => 'dispatch_error'
             ],
             'log_render_error' => [
-                'enabled'   => true,
-                'logger'    => 'render_error'
+                'enabled' => true,
+                'logger' => 'render_error'
             ]
         ],
-        'loggers'       => [
+        'loggers' => [
             'default' => [
                 'name' => 'Default Logger',
                 'handlers' => [

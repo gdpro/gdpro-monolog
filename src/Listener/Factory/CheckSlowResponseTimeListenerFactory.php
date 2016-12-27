@@ -42,11 +42,11 @@ class CheckSlowResponseTimeListenerFactory
         $globalConfig = $services->get('config');
 
         $loggerName = null;
-        if(isset($config['gdpro_monolog']['listeners']['check_slow_response_time']['logger'])) {
+        if (isset($config['gdpro_monolog']['listeners']['check_slow_response_time']['logger'])) {
             $loggerName = $globalConfig['gdpro_monolog']['listeners']['check_slow_response_time']['logger'];
         }
 
-        if(isset($config['monolog']['listeners']['check_slow_response_time']['logger'])) {
+        if (isset($config['monolog']['listeners']['check_slow_response_time']['logger'])) {
             $loggerName = $globalConfig['monolog']['listeners']['check_slow_response_time']['logger'];
         }
 
@@ -58,11 +58,11 @@ class CheckSlowResponseTimeListenerFactory
         $globalConfig = $services->get('config');
 
         $threshold = null;
-        if(isset($config['gdpro_monolog']['listeners']['check_slow_response_time']['threshold'])) {
+        if (isset($config['gdpro_monolog']['listeners']['check_slow_response_time']['threshold'])) {
             $threshold = $globalConfig['gdpro_monolog']['listeners']['check_slow_response_time']['threshold'];
         }
 
-        if(isset($config['monolog']['listeners']['check_slow_response_time']['threshold'])) {
+        if (isset($config['monolog']['listeners']['check_slow_response_time']['threshold'])) {
             $threshold = $globalConfig['monolog']['listeners']['check_slow_response_time']['threshold'];
         }
 

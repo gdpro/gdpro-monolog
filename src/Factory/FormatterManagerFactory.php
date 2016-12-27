@@ -38,11 +38,11 @@ class FormatterManagerFactory
         $globalConfig = $services->get('config');
 
         $config = [];
-        if(isset($globalConfig['gdpro_monolog']['formatters'])) {
+        if (isset($globalConfig['gdpro_monolog']['formatters'])) {
             $config = array_merge_recursive($globalConfig['gdpro_monolog']['formatters']);
         }
 
-        if(isset($globalConfig['monolog']['formatters'])) {
+        if (isset($globalConfig['monolog']['formatters'])) {
             $config = array_merge_recursive($globalConfig['monolog']['formatters']);
         }
 

@@ -38,11 +38,11 @@ class HandlerManagerFactory
         $globalConfig = $services->get('config');
 
         $config = [];
-        if(isset($globalConfig['gdpro_monolog']['handlers'])) {
+        if (isset($globalConfig['gdpro_monolog']['handlers'])) {
             $config = array_merge_recursive($globalConfig['gdpro_monolog']['handlers']);
         }
 
-        if(isset($globalConfig['monolog']['handlers'])) {
+        if (isset($globalConfig['monolog']['handlers'])) {
             $config = array_merge_recursive($globalConfig['monolog']['handlers']);
         }
 

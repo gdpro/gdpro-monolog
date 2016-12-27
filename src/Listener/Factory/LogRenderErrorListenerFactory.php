@@ -37,11 +37,11 @@ class LogRenderErrorListenerFactory
         $globalConfig = $services->get('config');
 
         $loggerName = null;
-        if(isset($config['gdpro_monolog']['listeners']['log_render_error']['logger'])) {
+        if (isset($config['gdpro_monolog']['listeners']['log_render_error']['logger'])) {
             $loggerName = $globalConfig['gdpro_monolog']['listeners']['log_render_error']['logger'];
         }
 
-        if(isset($config['monolog']['listeners']['log_render_error']['logger'])) {
+        if (isset($config['monolog']['listeners']['log_render_error']['logger'])) {
             $loggerName = $globalConfig['monolog']['listeners']['log_render_error']['logger'];
         }
 
