@@ -77,14 +77,6 @@ return [
                 ]
             ]
         ],
-        'formatters'    => [
-            'default' => [
-                'class' => 'LineFormatter',
-                'args' => [
-                    'application' => 'gdpro'
-                ]
-            ]
-        ],
         'handlers'      => [
             // Default define the default value for all you handlers. So please do not delete
             'default' => [
@@ -118,6 +110,14 @@ return [
                     'stream' =>  'data/log/slow_response_time.log'
                 ]
             ]
-        ]
+        ],
+        'formatters'    => [
+            'default' => [
+                'class' => 'LineFormatter',
+                'args' => [
+                    'application' => 'gdpro'
+                ]
+            ]
+        ],
     ]
 ];

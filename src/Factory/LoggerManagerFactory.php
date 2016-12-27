@@ -43,11 +43,11 @@ class LoggerManagerFactory
 
         $config = [];
         if (isset($globalConfig['gdpro_monolog']['loggers'])) {
-            $config = array_merge_recursive($globalConfig['gdpro_monolog']['loggers']);
+            $config = $globalConfig['gdpro_monolog']['loggers'];
         }
 
         if (isset($globalConfig['monolog']['loggers'])) {
-            $config = array_merge_recursive($globalConfig['monolog']['loggers']);
+            $config = $globalConfig['monolog']['loggers'];
         }
 
         return $config;

@@ -58,11 +58,11 @@ class CheckSlowResponseTimeListenerFactory
         $globalConfig = $services->get('config');
 
         $threshold = null;
-        if (isset($config['gdpro_monolog']['listeners']['check_slow_response_time']['threshold'])) {
+        if (isset($globalConfig['gdpro_monolog']['listeners']['check_slow_response_time']['threshold'])) {
             $threshold = $globalConfig['gdpro_monolog']['listeners']['check_slow_response_time']['threshold'];
         }
 
-        if (isset($config['monolog']['listeners']['check_slow_response_time']['threshold'])) {
+        if (isset($globalConfig['monolog']['listeners']['check_slow_response_time']['threshold'])) {
             $threshold = $globalConfig['monolog']['listeners']['check_slow_response_time']['threshold'];
         }
 
