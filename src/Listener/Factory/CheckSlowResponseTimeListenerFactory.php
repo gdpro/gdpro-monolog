@@ -27,7 +27,7 @@ class CheckSlowResponseTimeListenerFactory
         $logger = $loggerManager->get($loggerName);
 
         $instance = new CheckSlowResponseTimeListener();
-        $instance->setThresold($threshold);
+        $instance->setThreshold($threshold);
         $instance->setLogger($logger);
 
         return $instance;
