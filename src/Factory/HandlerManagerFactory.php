@@ -10,9 +10,7 @@ class HandlerManagerFactory
 {
     public function __invoke(ContainerInterface $services)
     {
-        $globalConfig = $services->get('config');
-        $config = $globalConfig['gdpro_monolog']['handlers'];
-
+        $config = $this->getConfig($services);
         $builder = $services->get(HandlerBuilder::class);
         $formatterManager = $services->get(FormatterManager::class);
 
@@ -22,5 +20,21 @@ class HandlerManagerFactory
         $instance->setFormatterManager($formatterManager);
 
         return $instance;
+    }
+
+    protected function getConfig(ContainerInterface $services)
+    {
+        $globalConfig = $services->get('config');
+
+        $config = [];
+        if(isset($globalConfig['gdpro_monolog']['handlers'])) {
+            $config = array_merge_recursive($globalConfig['gdpro_monolog']['handlers']);
+        }
+
+        if(isset($globalConfig['monolog']['handlers'])) {
+            $config = array_merge_recursive($globalConfig['monolog']['handlers']);
+        }
+
+        return $config;
     }
 }

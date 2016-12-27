@@ -10,8 +10,7 @@ class LoggerManagerFactory
 {
     public function __invoke(ContainerInterface $services)
     {
-        $globalConfig = $services->get('config');
-        $config = $globalConfig['gdpro_monolog']['loggers'];
+        $config = $this->getConfig($services);
         $handlerManager = $services->get(HandlerManager::class);
         $formatterManager = $services->get(FormatterManager::class);
 
@@ -21,5 +20,21 @@ class LoggerManagerFactory
         $instance->setFormatterManager($formatterManager);
 
         return $instance;
+    }
+
+    protected function getConfig(ContainerInterface $services)
+    {
+        $globalConfig = $services->get('config');
+
+        $config = [];
+        if(isset($globalConfig['gdpro_monolog']['loggers'])) {
+            $config = array_merge_recursive($globalConfig['gdpro_monolog']['loggers']);
+        }
+
+        if(isset($globalConfig['monolog']['loggers'])) {
+            $config = array_merge_recursive($globalConfig['monolog']['loggers']);
+        }
+
+        return $config;
     }
 }

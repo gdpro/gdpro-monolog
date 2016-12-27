@@ -9,9 +9,8 @@ class CheckSlowResponseTimeListenerFactory
 {
     public function __invoke(ContainerInterface $services)
     {
-        $config = $services->get('config');
-        $loggerName = $config['gdpro_monolog']['listeners']['check_slow_response_time']['logger'];
-        $threshold  = $config['gdpro_monolog']['listeners']['check_slow_response_time']['threshold'];
+        $loggerName = $this->getLoggerName($services);
+        $threshold  = $this->getThresold($services);
         $loggerManager = $services->get(LoggerManager::class);
         $logger = $loggerManager->get($loggerName);
 
@@ -20,5 +19,37 @@ class CheckSlowResponseTimeListenerFactory
         $instance->setLogger($logger);
 
         return $instance;
+    }
+
+    protected function getLoggerName(ContainerInterface $services)
+    {
+        $globalConfig = $services->get('config');
+
+        $loggerName = null;
+        if(isset($config['gdpro_monolog']['listeners']['check_slow_response_time']['logger'])) {
+            $loggerName = $globalConfig['gdpro_monolog']['listeners']['check_slow_response_time']['logger'];
+        }
+
+        if(isset($config['monolog']['listeners']['check_slow_response_time']['logger'])) {
+            $loggerName = $globalConfig['monolog']['listeners']['check_slow_response_time']['logger'];
+        }
+
+        return $loggerName;
+    }
+
+    protected function getThresold(ContainerInterface $services)
+    {
+        $globalConfig = $services->get('config');
+
+        $threshold = null;
+        if(isset($config['gdpro_monolog']['listeners']['check_slow_response_time']['threshold'])) {
+            $threshold = $globalConfig['gdpro_monolog']['listeners']['check_slow_response_time']['threshold'];
+        }
+
+        if(isset($config['monolog']['listeners']['check_slow_response_time']['threshold'])) {
+            $threshold = $globalConfig['monolog']['listeners']['check_slow_response_time']['threshold'];
+        }
+
+        return $threshold;
     }
 }
