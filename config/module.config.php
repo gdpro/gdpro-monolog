@@ -77,8 +77,7 @@ return [
                 ]
             ]
         ],
-        'handlers'      => [
-            // Default define the default value for all you handlers. So please do not delete
+        'handlers' => [
             'default' => [
                 'class' => 'StreamHandler',
                 // This args match to the constructor arg of the class
@@ -96,19 +95,37 @@ return [
                 'formatter' => 'default'
             ],
             'render_error' => [
+                'class' => 'StreamHandler',
                 'args' => [
-                    'stream' =>  'data/log/render_error.log'
-                ]
+                    'stream' =>  'data/log/render_error.log',
+                    'level' => 100,
+                    'bubble' => true,
+                    'file_permission' => 0777,
+                    'user_locking' => false
+                ],
+                'formatter' => 'default'
             ],
             'dispatch_error' => [
+                'class' => 'StreamHandler',
                 'args' => [
-                    'stream' =>  'data/log/dispatch_error.log'
-                ]
+                    'stream' =>  'data/log/dispatch_error.log',
+                    'level' => 100,
+                    'bubble' => true,
+                    'file_permission' => 0777,
+                    'user_locking' => false
+                ],
+                'formatter' => 'default'
             ],
             'slow_response_time' => [
+                'class' => 'StreamHandler',
                 'args' => [
-                    'stream' =>  'data/log/slow_response_time.log'
-                ]
+                    'stream' =>  'data/log/slow_response_time.log',
+                    'level' => 100,
+                    'bubble' => true,
+                    'file_permission' => 0777,
+                    'user_locking' => false
+                ],
+                'formatter' => 'default'
             ]
         ],
         'formatters'    => [

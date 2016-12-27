@@ -32,9 +32,7 @@ class FormatterManager
             return $this->registeredFormatters[$name];
         }
 
-        $defaultConfig = $this->config['default'];
-        $formatterConfig = array_replace_recursive($defaultConfig, $this->config[$name]);
-
+        $formatterConfig = $this->config[$name];
         $formatterClass = $formatterConfig['class'];
         $formatterArgs = $formatterConfig['args'];
         $formatterFqcn = '\\Monolog\\Formatter\\'.$formatterClass;

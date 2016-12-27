@@ -37,9 +37,7 @@ class HandlerManager
             return $this->registeredHandlers[$name];
         }
 
-        $defaultConfig = $this->config['default'];
-        $handlerConfig = array_replace_recursive($defaultConfig, $this->config[$name]);
-
+        $handlerConfig = $this->config[$name];
         $handlerClass = $handlerConfig['class'];
         $handlerArgs = $handlerConfig['args'];
         $handlerFqcn = '\\Monolog\\Handler\\'.$handlerClass;

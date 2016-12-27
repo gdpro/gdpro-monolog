@@ -43,13 +43,12 @@ class LoggerManager
             return $this->registeredLoggers[$name];
         }
 
-        $defaultConfig = $this->config['default'];
-        $loggerConfig = array_replace_recursive($defaultConfig, $this->config[$name]);
+        $loggerConfig = $this->config[$name];
 
-        $handlers       = [];
-        $handlerNames   = $loggerConfig['handlers'];
+        $handlers = [];
+        $handlerNames = $loggerConfig['handlers'];
         foreach ($handlerNames as $handlerName) {
-            $handler    = $this->handlerManager->get($handlerName);
+            $handler = $this->handlerManager->get($handlerName);
             $handlers[] = $handler;
         }
 
@@ -58,9 +57,9 @@ class LoggerManager
             $processorNames = $loggerConfig['processors'];
 
             foreach ($processorNames as $processorName) {
-                $processorFQCN  = '\\Monolog\\Processor\\'.$processorName;
-                $processor      = new $processorFQCN();
-                $processors[]   = $processor;
+                $processorFQCN = '\\Monolog\\Processor\\'.$processorName;
+                $processor = new $processorFQCN();
+                $processors[] = $processor;
             }
         }
 
